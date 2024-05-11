@@ -73,7 +73,7 @@ public class Animal : MonoBehaviour
                 //if close enough to idle position then
                 if(Vector3.Distance(transform.position, idlePosition.position) < arrivalDistance)
                 {
-                    if(Random.Range(0f, 1.0f) <= chanceToShowGreeting)
+                    if(Random.Range(0f, 1.0f) <= chanceToShowGreeting && currentCase.CurrentCaseData.CurrentAnimal.PossibleGreetings.Count>0)
                     {
                         ShowDialogue(GetGreeting());
                     }
@@ -125,6 +125,7 @@ public class Animal : MonoBehaviour
 
     public void ShowDialogue(DialogueData inDialogue)
     {
+        if (inDialogue == null) return; // Early return if there are no valid dialogue
         dialogueText.text = inDialogue.textValue;
         dialogueContainerObject.SetActive(true);
         timeRemainingToShowDialogue = inDialogue.duration;
@@ -146,6 +147,8 @@ public class Animal : MonoBehaviour
         {
             possibleResponses = currentCase.CurrentCaseData.CurrentAnimal.PossibleIncorrectGuiltyReactions;
         }
+
+        if (possibleResponses.Count == 0) return null;
         return possibleResponses[Random.Range(0, possibleResponses.Count)];
     }
     public DialogueData GetInnocentReaction(bool wasCorrect)

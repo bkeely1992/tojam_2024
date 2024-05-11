@@ -1,9 +1,12 @@
+using System;
 using Assets.Scripts.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static Assets.Scripts.Data.AnimalData;
+using Random = UnityEngine.Random;
 
 //Main script used for managing a ton of stuff (probably could stand for some refactoring because there's probably too much stuff in here)
 public class CaseManager : MonoBehaviour
@@ -29,6 +32,8 @@ public class CaseManager : MonoBehaviour
     [SerializeField]
     private Animal currentAnimal;
 
+    public AuthoredCaseDatabase AuthoredCaseDb;
+    
     //The exceptions that are used to determine what animals are guilty or innocent
     [SerializeField]
     private List<CrimeExceptionData> rulebookExceptions = new List<CrimeExceptionData>();
@@ -48,7 +53,7 @@ public class CaseManager : MonoBehaviour
     //Script used for managing the computer database which contains the daily exceptions
     [SerializeField]
     private ComputerDatabase computerDatabase;
-
+    
     //Data map of all of the possible animal species
     [SerializeField]
     private List<AnimalData> allAnimalData = new List<AnimalData>();
@@ -182,20 +187,97 @@ public class CaseManager : MonoBehaviour
     public void GenerateCasesForDay(int dayIndex)
     {
         queuedCases = new Queue<CaseData>();
+
+        remainingCasesForTheDay = currentNumberOfCases;
+        addedAuthoredCasesToCurrentDay = new List<string>();
         for (int i = 0; i < currentNumberOfCases; i++)
         {
-            //Randomly choose an animal
-            AnimalData currentAnimalData = animalDataMap[AnimalData.AllAnimalSpecies[Random.Range(0, AllAnimalSpecies.Count)]];
-            currentAnimalData.SetName();
-            //Randomly choose a crime
-            CrimeData currentCrimeData = crimeDataMap[CrimeData.AllCrimes[Random.Range(0, CrimeData.AllCrimes.Count)]];
-            queuedCases.Enqueue(new CaseData(dayIndex, currentAnimalData, currentCrimeData));
+            var generatedCaseForTheDay = GenerateNewCaseData(dayIndex);
+            queuedCases.Enqueue(generatedCaseForTheDay);
         }
 
         currentNumberOfCases += numberOfCasesDayIncrement;
         currentCase.SetNextCase(queuedCases.Dequeue());
         currentAnimal.Generate(currentCase);
     }
+
+    // AUTHORING SYSTEM START
+    #region Authoring System
+    private List<string> addedAuthoredCasesToCurrentDay;
+    private int remainingCasesForTheDay = 0;
+    private CaseData GenerateNewCaseData(int dayIndex)
+    {
+        CaseData pickedCase = null;
+        // Evaluate if there will be any authored case has to be taken during the target day
+        var validAuthoredCasesForTheDay = HowManyAuthoredCasesWeNeedToTake(dayIndex);
+        // Filter only the non-added authored cases
+        validAuthoredCasesForTheDay = validAuthoredCasesForTheDay
+            .Where(x => !addedAuthoredCasesToCurrentDay.Contains(x.GimmeYourGuid())).ToList();
+        if (remainingCasesForTheDay - validAuthoredCasesForTheDay.Count > 0)
+        {
+            // We have room for randomCases
+            var shallWeGenerateRandom = Random.Range(0, 2); // if 0 => random, 1=>authored
+            if (shallWeGenerateRandom == 0) // Generate random
+            {
+                pickedCase = GenerateRandomCase(dayIndex);
+            }
+            else // Non random picked by random
+            {
+                // If we have any authored in the list for today
+                if (validAuthoredCasesForTheDay.Count > 0)
+                {
+                    pickedCase = GenerateAuthoredCase(dayIndex);
+                }
+                else // if there are no authored case left, just gen rnd
+                {
+                    pickedCase = GenerateRandomCase(dayIndex);
+                }
+            }
+        }
+        else
+        {
+            // Generate authored case because we have no room for random
+            pickedCase = GenerateAuthoredCase(dayIndex);
+        }
+        // If so, see if we have any space for random cases
+        // If there are slots for random cases hit them in, if not just get the authored ones\
+        remainingCasesForTheDay--;
+        return pickedCase;
+    }
+
+    private List<AuthoredCase> HowManyAuthoredCasesWeNeedToTake(int dayIndex)
+    {
+        if (AuthoredCaseDb.Cases == null || AuthoredCaseDb.Cases.Count == 0) return new List<AuthoredCase>();
+
+        return AuthoredCaseDb.Cases.Where(x => (x.DayRanges.x < dayIndex && x.DayRanges.y >= dayIndex) || x.NoDayRange).ToList();
+    }
+    
+    private CaseData GenerateRandomCase(int dayIndex)
+    {
+        //Randomly choose an animal
+        AnimalData currentAnimalData = animalDataMap[AnimalData.AllAnimalSpecies[Random.Range(0, AllAnimalSpecies.Count)]];
+        currentAnimalData.SetName();
+        //Randomly choose a crime
+        CrimeData currentCrimeData = crimeDataMap[CrimeData.AllCrimes[Random.Range(0, CrimeData.AllCrimes.Count)]];
+        return new CaseData(dayIndex, currentAnimalData, currentCrimeData);
+    }
+
+    private CaseData GenerateAuthoredCase(int dayIndex)
+    {
+        var validAuthoredCases = AuthoredCaseDb.Cases.Where(x => DoesTheAuthoredCaseValid(x,dayIndex)).ToList();
+        var pickedCase = validAuthoredCases[Random.Range(0, validAuthoredCases.Count)];
+        addedAuthoredCasesToCurrentDay.Add(pickedCase.GimmeYourGuid()); // add the picked case to the authored cases
+        pickedCase.Animal.SetName();
+        return new CaseData(dayIndex, pickedCase.Animal, pickedCase.Crime);
+    }
+
+    private bool DoesTheAuthoredCaseValid(AuthoredCase x, int dayIndex)
+    {
+        return ((x.DayRanges.x < dayIndex && x.DayRanges.y >= dayIndex) || x.NoDayRange) &&
+               !addedAuthoredCasesToCurrentDay.Contains(x.GimmeYourGuid());
+    }
+    #endregion
+    // AUTHORING SYSTEM OVER
 
     // Update is called once per frame
     void Update()

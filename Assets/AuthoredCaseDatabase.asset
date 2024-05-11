@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b0f4b453124b1b9af42a22a47fbb8f, type: 3}
+  m_Name: AuthoredCaseDatabase
+  m_EditorClassIdentifier: 
+  Cases:
+  - NoDayRange: 1
+    DayRanges: {x: 0, y: 0}
+    Animal:
+      characterSprite: {fileID: 21300000, guid: 83af408897a62ea4a869914482a152be, type: 3}
+      caseFileSprite: {fileID: 21300000, guid: 1ca75882d7376db4bab3dc9381d242cd, type: 3}
+      Class: 0
+      Diet: 0
+      Species: 0
+      possibleNames:
+      - Mert
+      - MertDawg
+      - RealGMert
+      possibleGreetings: []
+      possibleCorrectGuiltyReactions: []
+      possibleIncorrectGuiltyReactions: []
+      possibleCorrectInnocentReactions: []
+      possibleIncorrectInnocentReactions: []
+    Crime:
+      crimeValue: 0
+      crimeText: Robbery
+      sprite: {fileID: 21300000, guid: c8a940f6efbb89448b989a59ea7937bf, type: 3}
