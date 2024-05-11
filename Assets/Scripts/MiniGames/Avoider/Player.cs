@@ -5,11 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private Runner runner;
+    private Avoider avoider;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Destroy(collision.gameObject);
-        runner.GaneOver(false);
+        avoider.GaneOver(false);
     }
 }

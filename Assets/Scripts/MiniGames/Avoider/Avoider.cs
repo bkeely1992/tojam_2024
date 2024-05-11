@@ -4,27 +4,35 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class Runner : MonoBehaviour
+// Script for managing the avoider minigame
+public class Avoider : MonoBehaviour
 {
+    // The objects that will be spawned that need to be avoided
     [SerializeField]
     private List<GameObject> obstacles = new List<GameObject>();
     [SerializeField]
     private GameObject obstaclesParent;
 
+    // used to control how often the objects spawn
     [SerializeField]
     private float spawnRate;
     private float lastSpawnTime;
     private List<Vector2> Spawns;
 
+    // the game object for the character
     [SerializeField]
     private GameObject characterPrefab;
 
+    // properties to control the mini game length
     [SerializeField]
     private float duration;
     private float elapsedTime;
 
+    // The computer screen object. Used for position the character and the obstacles
     [SerializeField]
     private GameObject screen;
+
+    // The text object that will be displayed when the game is over
     [SerializeField]
     private GameObject gameOverText;
 

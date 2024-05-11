@@ -16,7 +16,7 @@ public class ComputerDatabase : MonoBehaviour
     private Transform computerMiniGameParent;
 
     [SerializeField]
-    private GameObject runner;
+    private GameObject avoider;
 
     //Creates all of the daily exceptions in the computer database
     public void SetExceptions(List<CrimeExceptionData> exceptions)
@@ -38,16 +38,16 @@ public class ComputerDatabase : MonoBehaviour
     public enum screen
     {
         exceptions,
-        runner
+        avoider
     }
 
     public void ChangeScreen(screen selectedScreen)
     {
         switch (selectedScreen)
         {
-            case screen.runner:
+            case screen.avoider:
                 computerExceptionsParent.gameObject.SetActive(false);
-                Instantiate(runner, computerMiniGameParent);
+                Instantiate(avoider, computerMiniGameParent);
                 break;
             case screen.exceptions:
                 computerExceptionsParent.gameObject.SetActive(true);

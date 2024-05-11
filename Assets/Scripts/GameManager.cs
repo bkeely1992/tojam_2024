@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.A))
-            computer.ChangeScreen(ComputerDatabase.screen.runner);
+            computer.ChangeScreen(ComputerDatabase.screen.avoider);
         else if (Input.GetKeyUp(KeyCode.E))
             computer.ChangeScreen(ComputerDatabase.screen.exceptions);
     }
