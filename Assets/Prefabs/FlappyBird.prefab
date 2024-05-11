@@ -383,7 +383,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 217.89636, y: 221.15677}
@@ -411,10 +411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c192d56a08c6bcd41a45267a9ddd95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdManager: {fileID: 6967397657149483153}
-  colliderMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!1 &2707484439105247389
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +455,7 @@ GameObject:
   - component: {fileID: 2215738000427918426}
   - component: {fileID: 1432037664205300228}
   - component: {fileID: 8556400726471634521}
+  - component: {fileID: 7137106400017497717}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -579,7 +576,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 3.9331741, y: -0.25758362}
@@ -595,3 +592,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 42.558426, y: 28.699799}
   m_EdgeRadius: 0
+--- !u!114 &7137106400017497717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5762326114367758328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9387801e977b84d95718db2fc23e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flappyBirdManager: {fileID: 6967397657149483153}
+  colliderMask:
+    serializedVersion: 2
+    m_Bits: 64

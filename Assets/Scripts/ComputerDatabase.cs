@@ -33,17 +33,22 @@ public class ComputerDatabase : MonoBehaviour
     [SerializeField]
     private List<GameObject> minigamePrefabs;
 
-    private FlappyBirdManager flappyBirdManager;
-    private Avoider avoiderManager;
+    [SerializeField]
+    private List<GameObject> confirmationOptions;
 
     public float timeBeforeConfirmationRequired;
     public float timeBeforeScreensaver;
 
+    public float confirmationMaxHeightVariance;
+    public float confirmationMaxWidthVariance;
+
+    private Vector3 confirmationStartingPosition;
     private float timeWaiting = 0.0f;
     private GameObject currentMinigameObject;
 
     private void Start()
     {
+        confirmationStartingPosition = confirmationParent.transform.position;
         screensaver.onMouseEnterScreen.AddListener(EndScreensaver);
     }
 
@@ -61,6 +66,12 @@ public class ComputerDatabase : MonoBehaviour
                 timeWaiting += Time.deltaTime;
                 if(timeWaiting > timeBeforeConfirmationRequired)
                 {
+                    //confirmationParent.transform.position = confirmationStartingPosition + new Vector3(Random.Range(-confirmationMaxWidthVariance, confirmationMaxWidthVariance), Random.Range(-confirmationMaxHeightVariance, confirmationMaxHeightVariance), 0f);
+                    foreach(GameObject confirmationOption in confirmationOptions)
+                    {
+                        confirmationOption.SetActive(false);
+                    }
+                    confirmationOptions[Random.Range(0, confirmationOptions.Count)].SetActive(true);
                     confirmationParent.SetActive(true);
                     currentState = State.confirming;
                 }
@@ -111,6 +122,15 @@ public class ComputerDatabase : MonoBehaviour
         confirmationParent.SetActive(false);
         timeWaiting = 0.0f;
         currentState = State.live;
+    }
+
+    public void PressNo()
+    {
+        timeWaiting = 0.0f;
+        computerExceptionsParent.gameObject.SetActive(false);
+        confirmationParent.SetActive(false);
+        screensaver.gameObject.SetActive(true);
+        currentState = State.screensaver;
     }
 
     public void LoseGame()
