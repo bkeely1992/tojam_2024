@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 // Script for managing the avoider minigame
-public class Avoider : MonoBehaviour
+public class Avoider : Minigame
 {
     // The objects that will be spawned that need to be avoided
     [SerializeField]
@@ -38,6 +38,9 @@ public class Avoider : MonoBehaviour
     [SerializeField]
     private GameObject gameOverText;
 
+    [SerializeField]
+    private Transform topLane, midLane, bottomLane;
+
     private Dictionary<Lane, float> laneCoords;
 
     private Lane currentLane = Lane.middle;
@@ -56,15 +59,15 @@ public class Avoider : MonoBehaviour
         var screentransform = (RectTransform)screen.transform;
         laneCoords = new Dictionary<Lane, float>()
         {
-            { Lane.top, screentransform.position.y + screentransform.rect.height / 3 },
-            { Lane.middle, screentransform.position.y },
-            { Lane.bottom, screentransform.position.y - screentransform.rect.height / 3 }
+            { Lane.top, topLane.position.y },
+            { Lane.middle, midLane.position.y },
+            { Lane.bottom, bottomLane.position.y }
         };
         Spawns = new List<Vector2>()
         {
-            new Vector2(screentransform.position.x + screentransform.rect.width / 2, laneCoords[Lane.top]),
-            new Vector2(screentransform.position.x + screentransform.rect.width / 2, laneCoords[Lane.middle]),
-            new Vector2(screentransform.position.x + screentransform.rect.width / 2, laneCoords[Lane.bottom])
+            topLane.position,
+            midLane.position,
+            bottomLane.position
         };
 
         gameOverText.transform.position = screen.transform.position;
@@ -93,6 +96,7 @@ public class Avoider : MonoBehaviour
             }
             else
             {
+                Debug.Log("Test");
                 GaneOver(true);
             }
         }
@@ -100,19 +104,20 @@ public class Avoider : MonoBehaviour
 
     public void GaneOver(bool won)
     {
+        if (!running) return;
         running = false;
-        Destroy(characterPrefab);
-        Destroy(obstaclesParent);
-
+        
         if (won)
         {
             gameOverText.SetActive(true);
             gameOverText.GetComponent<TMP_Text>().text = "You Win!";
+            onWin.Invoke();
         }
         else
         {
             gameOverText.SetActive(true);
             gameOverText.GetComponent<TMP_Text>().text = "Game Over";
+            onLose.Invoke();
         }
     }
 
@@ -154,6 +159,6 @@ public class Avoider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        //Destroy(collision.gameObject);
     }
 }

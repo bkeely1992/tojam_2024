@@ -6,6 +6,12 @@ using UnityEngine;
 //Script used for managing the details of the visualization of the computer database in-game
 public class ComputerDatabase : MonoBehaviour
 {
+    private enum State
+    {
+        live, confirming, screensaver, login, game, invalid
+    }
+    private State currentState = State.login;
+
     [SerializeField]
     private Transform computerExceptionsParent;
 
@@ -13,13 +19,65 @@ public class ComputerDatabase : MonoBehaviour
     private GameObject computerExceptionPrefab;
 
     [SerializeField]
+    private Screensaver screensaver;
+
+    [SerializeField]
+    private GameObject loginParent;
+
+    [SerializeField]
+    private GameObject confirmationParent;
+
+    [SerializeField]
     private Transform computerMiniGameParent;
 
     [SerializeField]
-    private GameObject avoider;
+    private List<GameObject> minigamePrefabs;
 
-    [SerializeField]
-    private GameObject flappyBird;
+    private FlappyBirdManager flappyBirdManager;
+    private Avoider avoiderManager;
+
+    public float timeBeforeConfirmationRequired;
+    public float timeBeforeScreensaver;
+
+    private float timeWaiting = 0.0f;
+    private GameObject currentMinigameObject;
+
+    private void Start()
+    {
+        screensaver.onMouseEnterScreen.AddListener(EndScreensaver);
+    }
+
+    private void OnDisable()
+    {
+        screensaver.onMouseEnterScreen.RemoveListener(EndScreensaver);
+    }
+
+    private void Update()
+    {
+        
+        switch(currentState)
+        {
+            case State.live:
+                timeWaiting += Time.deltaTime;
+                if(timeWaiting > timeBeforeConfirmationRequired)
+                {
+                    confirmationParent.SetActive(true);
+                    currentState = State.confirming;
+                }
+                break;
+            case State.confirming:
+                timeWaiting += Time.deltaTime;
+                if(timeWaiting > timeBeforeScreensaver)
+                {
+                    timeWaiting = 0.0f;
+                    computerExceptionsParent.gameObject.SetActive(false);
+                    confirmationParent.SetActive(false);
+                    screensaver.gameObject.SetActive(true);
+                    currentState = State.screensaver;
+                }
+                break;
+        }
+    }
 
     //Creates all of the daily exceptions in the computer database
     public void SetExceptions(List<CrimeExceptionData> exceptions)
@@ -37,30 +95,52 @@ public class ComputerDatabase : MonoBehaviour
         }
     }
 
-    public enum screen
+    public void PressLogin()
     {
-        exceptions,
-        avoider,
-        flappyBird,
+        loginParent.SetActive(false);
+        currentMinigameObject = Instantiate(minigamePrefabs[Random.Range(0, minigamePrefabs.Count)], computerMiniGameParent);
+        Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
+        minigame.onLose.AddListener(LoseGame);
+        minigame.onWin.AddListener(CompleteGame);
+        computerMiniGameParent.gameObject.SetActive(true);
+        currentState = State.game;
     }
 
-    public void ChangeScreen(screen selectedScreen)
+    public void PressConfirmation()
     {
-        switch (selectedScreen)
-        {
-            case screen.avoider:
-                computerExceptionsParent.gameObject.SetActive(false);
-                Instantiate(avoider, computerMiniGameParent);
-                break;
-            case screen.flappyBird:
-                computerExceptionsParent.gameObject.SetActive(false);
-                Instantiate(flappyBird, computerMiniGameParent);
-                break;
-            case screen.exceptions:
-                computerExceptionsParent.gameObject.SetActive(true);
-                if (computerMiniGameParent.childCount > 0)
-                    DestroyImmediate(computerMiniGameParent.GetChild(0).gameObject);
-                break;
-        }
+        confirmationParent.SetActive(false);
+        timeWaiting = 0.0f;
+        currentState = State.live;
+    }
+
+    public void LoseGame()
+    {
+        Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
+        minigame.onLose.RemoveListener(LoseGame);
+        minigame.onWin.RemoveListener(CompleteGame);
+        Destroy(currentMinigameObject);
+        
+        computerMiniGameParent.gameObject.SetActive(false);
+        loginParent.SetActive(true);
+        currentState = State.login;
+    }
+
+    public void CompleteGame()
+    {
+        Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
+        minigame.onLose.RemoveListener(LoseGame);
+        minigame.onWin.RemoveListener(CompleteGame);
+        Destroy(currentMinigameObject);
+        
+        computerMiniGameParent.gameObject.SetActive(false);
+        computerExceptionsParent.gameObject.SetActive(true);
+        currentState = State.live;
+    }
+
+    public void EndScreensaver()
+    {
+        screensaver.gameObject.SetActive(false);
+        loginParent.SetActive(true);
+        currentState = State.login;
     }
 }

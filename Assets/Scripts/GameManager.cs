@@ -38,12 +38,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.A))
-            computer.ChangeScreen(ComputerDatabase.screen.avoider);
-        else if (Input.GetKeyUp(KeyCode.E))
-            computer.ChangeScreen(ComputerDatabase.screen.exceptions);
-        else if (Input.GetKeyUp(KeyCode.F))
-            computer.ChangeScreen(ComputerDatabase.screen.flappyBird);
+
     }
 
     public void StartDay()

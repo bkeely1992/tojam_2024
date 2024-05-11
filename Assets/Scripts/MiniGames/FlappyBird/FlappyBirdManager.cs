@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class FlappyBirdManager : MonoBehaviour
+public class FlappyBirdManager : Minigame
 {
     [SerializeField]
     private Rigidbody2D bird;
@@ -68,21 +69,24 @@ public class FlappyBirdManager : MonoBehaviour
 
     public void GaneOver(bool won)
     {
+        if (!running) return;
         running = false;
-
-        Destroy(bird.gameObject);
-        Destroy(pipeParent);
 
         if (won)
         {
+            
             gameOverText.SetActive(true);
             gameOverText.GetComponent<TMP_Text>().text = "You Win!";
+            onWin.Invoke();
         }
         else
         {
+            
             gameOverText.SetActive(true);
             gameOverText.GetComponent<TMP_Text>().text = "Game Over";
+            onLose.Invoke();
         }
+        
     }
 
     private void Flap()
@@ -94,11 +98,11 @@ public class FlappyBirdManager : MonoBehaviour
     {
         var screentransform = (RectTransform)screen.transform;
         var obstacle = pipes[Random.Range(0, pipes.Count)];
-        Instantiate(obstacle, new Vector3(screentransform.position.x + screentransform.rect.width/2, screentransform.position.y, 0), Quaternion.identity, pipeParent.transform);
+        Instantiate(obstacle, pipeParent.transform.position, Quaternion.identity, pipeParent.transform);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        //Destroy(collision.gameObject);
     }
 }

@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public class Screensaver : MonoBehaviour
+public class Screensaver : MonoBehaviour, IPointerEnterHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    public UnityEvent onMouseEnterScreen;
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        onMouseEnterScreen.Invoke();
     }
 }
