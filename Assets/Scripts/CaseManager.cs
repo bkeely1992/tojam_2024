@@ -5,9 +5,13 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static Assets.Scripts.Data.AnimalData;
 
+//Main script used for managing a ton of stuff (probably could stand for some refactoring because there's probably too much stuff in here)
 public class CaseManager : MonoBehaviour
 {
+    //The cases that are currently queued for the current day
     public Queue<CaseData> queuedCases = new Queue<CaseData>();
+
+    //Properties used for dictating how many cases and exceptions there are per day
     public int baseNumberOfCases = 4;
     public int numberOfCasesDayIncrement = 1;
 
@@ -17,16 +21,20 @@ public class CaseManager : MonoBehaviour
     private int currentNumberOfCases = 0;
     private int currentNumberOfExceptions = 0;
 
+    //Script used for managing the visualization of the case in-game
     [SerializeField]
     private Case currentCase;
 
+    //Script used for managing the visualization of the animal in-game
     [SerializeField]
     private Animal currentAnimal;
 
+    //The exceptions that are used to determine what animals are guilty or innocent
     [SerializeField]
     private List<CrimeExceptionData> rulebookExceptions = new List<CrimeExceptionData>();
     private List<CrimeExceptionData> dailyExceptions = new List<CrimeExceptionData>();
 
+    //Text field used to show how many strikes the player has gotten
     [SerializeField]
     private TMPro.TMP_Text strikesText;
 
@@ -37,21 +45,26 @@ public class CaseManager : MonoBehaviour
         animal_class, animal_diet, animal_species, invalid
     }
 
+    //Script used for managing the computer database which contains the daily exceptions
     [SerializeField]
     private ComputerDatabase computerDatabase;
 
+    //Data map of all of the possible animal species
     [SerializeField]
     private List<AnimalData> allAnimalData = new List<AnimalData>();
     private Dictionary<AnimalData.Animal_species, AnimalData> animalDataMap = new Dictionary<Animal_species, AnimalData>();
 
+    //Data map of all of the possible animal classes
     [SerializeField]
     private List<AnimalClassData> allAnimalClassData = new List<AnimalClassData>();
     private Dictionary<Animal_class, AnimalClassData> animalClassMap = new Dictionary<Animal_class, AnimalClassData>();
 
+    //Data map of all of the possible animal diets
     [SerializeField]
     private List<AnimalDietData> allAnimalDietData = new List<AnimalDietData>();
     private Dictionary<Animal_diet, AnimalDietData> animalDietMap = new Dictionary<Animal_diet, AnimalDietData>();
 
+    //Data map of all of the possible crimes
     [SerializeField]
     private List<CrimeData> allCrimeData = new List<CrimeData>();
     private Dictionary<CrimeData.Crime, CrimeData> crimeDataMap = new Dictionary<CrimeData.Crime, CrimeData>();

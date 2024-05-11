@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script used for managing the high level game execution in terms of days
 public class GameManager : MonoBehaviour
 {
     public int dayIndex = 0;
@@ -43,7 +44,5 @@ public class GameManager : MonoBehaviour
         
         caseManager.GenerateExceptionsForDay(dayIndex);
         caseManager.GenerateCasesForDay(dayIndex);
-
-
     }
 }

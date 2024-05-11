@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Script used for managing the visualization of a given computer exception
 public class ComputerException : MonoBehaviour
 {
     [SerializeField]

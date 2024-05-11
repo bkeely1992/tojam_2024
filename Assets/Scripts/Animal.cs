@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//The current animal in the scene.
 public class Animal : MonoBehaviour
 {
+    //State machine logic used for managing the behaviour of the animal
     public enum State
     {
         off_screen, walk_in, walk_out, idle, invalid
@@ -11,12 +13,14 @@ public class Animal : MonoBehaviour
     private State currentState = State.off_screen;
     private Case currentCase = null;
 
+    //Transforms used for determining where the animal navigates in the scene
     [SerializeField]
     private Transform startPosition, idlePosition, exitPosition;
 
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    //Variables used for specifying the properties of the motion of the animal
     public float speed;
     public float arrivalDistance;
 

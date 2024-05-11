@@ -7,6 +7,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.Data
 {
+    //Data class used for managing the details of an exception for crimes
+    //IE: An animal is allowed to permit a specific kind of crime because of their nature
     [Serializable]
     public class CrimeExceptionData
     {

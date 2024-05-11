@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Data class used for managing the details of a specific type of crime
 [System.Serializable]
 public class CrimeData
 {

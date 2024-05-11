@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script used for managing the details of the visualization of the computer database in-game
 public class ComputerDatabase : MonoBehaviour
 {
     [SerializeField]
@@ -11,6 +12,7 @@ public class ComputerDatabase : MonoBehaviour
     [SerializeField]
     private GameObject computerExceptionPrefab;
 
+    //Creates all of the daily exceptions in the computer database
     public void SetExceptions(List<CrimeExceptionData> exceptions)
     {
         while (computerExceptionsParent.childCount > 0)

@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Data
 {
+    //Data class used for containing the information on a specific type of animal diet
     [Serializable]
     public class AnimalDietData
     {
