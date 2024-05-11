@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
             computer.ChangeScreen(ComputerDatabase.screen.avoider);
         else if (Input.GetKeyUp(KeyCode.E))
             computer.ChangeScreen(ComputerDatabase.screen.exceptions);
+        else if (Input.GetKeyUp(KeyCode.F))
+            computer.ChangeScreen(ComputerDatabase.screen.flappyBird);
     }
 
     public void StartDay()

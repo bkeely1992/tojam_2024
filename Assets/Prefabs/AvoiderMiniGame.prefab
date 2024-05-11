@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -356,6 +356,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5265185376721297134, guid: 3a7d6ee8f691eb148ad3be4108516a48, type: 3}
       propertyPath: runner
+      value: 
+      objectReference: {fileID: 75875620141102849}
+    - target: {fileID: 5265185376721297134, guid: 3a7d6ee8f691eb148ad3be4108516a48, type: 3}
+      propertyPath: avoider
       value: 
       objectReference: {fileID: 75875620141102849}
     - target: {fileID: 5810077048233234993, guid: 3a7d6ee8f691eb148ad3be4108516a48, type: 3}

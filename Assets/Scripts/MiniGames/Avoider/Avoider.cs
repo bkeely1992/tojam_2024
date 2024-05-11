@@ -27,6 +27,8 @@ public class Avoider : MonoBehaviour
     [SerializeField]
     private float duration;
     private float elapsedTime;
+    private bool running = true;
+
 
     // The computer screen object. Used for position the character and the obstacles
     [SerializeField]
@@ -39,9 +41,6 @@ public class Avoider : MonoBehaviour
     private Dictionary<Lane, float> laneCoords;
 
     private Lane currentLane = Lane.middle;
-
-    private bool running = true;
-
     enum Lane
     {
         top, middle, bottom
@@ -108,12 +107,12 @@ public class Avoider : MonoBehaviour
         if (won)
         {
             gameOverText.SetActive(true);
-            //gameOverText.GetComponent<TextMeshPro>().text = "You Win!";
+            gameOverText.GetComponent<TMP_Text>().text = "You Win!";
         }
         else
         {
             gameOverText.SetActive(true);
-            //gameOverText.GetComponent<TextMeshPro>().text = "Game Over";
+            gameOverText.GetComponent<TMP_Text>().text = "Game Over";
         }
     }
 

@@ -18,6 +18,9 @@ public class ComputerDatabase : MonoBehaviour
     [SerializeField]
     private GameObject avoider;
 
+    [SerializeField]
+    private GameObject flappyBird;
+
     //Creates all of the daily exceptions in the computer database
     public void SetExceptions(List<CrimeExceptionData> exceptions)
     {
@@ -38,7 +41,8 @@ public class ComputerDatabase : MonoBehaviour
     public enum screen
     {
         exceptions,
-        avoider
+        avoider,
+        flappyBird,
     }
 
     public void ChangeScreen(screen selectedScreen)
@@ -48,6 +52,10 @@ public class ComputerDatabase : MonoBehaviour
             case screen.avoider:
                 computerExceptionsParent.gameObject.SetActive(false);
                 Instantiate(avoider, computerMiniGameParent);
+                break;
+            case screen.flappyBird:
+                computerExceptionsParent.gameObject.SetActive(false);
+                Instantiate(flappyBird, computerMiniGameParent);
                 break;
             case screen.exceptions:
                 computerExceptionsParent.gameObject.SetActive(true);

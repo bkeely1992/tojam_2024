@@ -420,6 +420,7 @@ MonoBehaviour:
   computerExceptionPrefab: {fileID: 6384193981378855765, guid: dca44a38b21bf0b4d9648409da1a481c, type: 3}
   computerMiniGameParent: {fileID: 622572332}
   avoider: {fileID: 2303356594622082388, guid: a9a1a8ae561e4ea47827fcb2e64f6423, type: 3}
+  flappyBird: {fileID: 998075551617668555, guid: 30af7c8af83e49043bd546754f1c73f2, type: 3}
 --- !u!4 &378358928
 Transform:
   m_ObjectHideFlags: 0
