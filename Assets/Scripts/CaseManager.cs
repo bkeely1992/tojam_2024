@@ -155,8 +155,8 @@ public class CaseManager : MonoBehaviour
         for (int i = 0; i < currentNumberOfCases; i++)
         {
             //Randomly choose an animal
-            AnimalData currentAnimalData = animalDataMap[AnimalData.AllAnimalSpecies[Random.Range(0, AllAnimalSpecies.Count)]]; 
-
+            AnimalData currentAnimalData = animalDataMap[AnimalData.AllAnimalSpecies[Random.Range(0, AllAnimalSpecies.Count)]];
+            currentAnimalData.SetName();
             //Randomly choose a crime
             CrimeData currentCrimeData = crimeDataMap[CrimeData.AllCrimes[Random.Range(0, CrimeData.AllCrimes.Count)]];
             queuedCases.Enqueue(new CaseData(dayIndex, currentAnimalData, currentCrimeData));

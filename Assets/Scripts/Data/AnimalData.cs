@@ -29,8 +29,19 @@ namespace Assets.Scripts.Data
         public Animal_diet Diet = Animal_diet.invalid;
         public Animal_species Species = Animal_species.invalid;
 
+        [SerializeField]
+        private List<string> possibleNames = new List<string>();
+
+        public string CurrentName => currentName;
+        private string currentName = "";
+
         public static List<Animal_class> AllAnimalClasses = new List<Animal_class>() { Animal_class.bird, Animal_class.reptile, Animal_class.mammal };
         public static List<Animal_diet> AllAnimalDiets = new List<Animal_diet>() { Animal_diet.herbivore, Animal_diet.carnivore, Animal_diet.omnivore };
         public static List<Animal_species> AllAnimalSpecies = new List<Animal_species>() { Animal_species.dog, Animal_species.lion, Animal_species.goat, Animal_species.owl, Animal_species.penguin, Animal_species.hawk, Animal_species.lizard, Animal_species.turtle, Animal_species.snake };
+    
+        public void SetName()
+        {
+            currentName = possibleNames[UnityEngine.Random.Range(0, possibleNames.Count)];
+        }
     }
 }

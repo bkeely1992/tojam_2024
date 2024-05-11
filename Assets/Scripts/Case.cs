@@ -36,7 +36,13 @@ public class Case : MonoBehaviour
         Debug.Log("Animal["+animalData.Species.ToString()+"] did crime["+currentCaseData.CurrentCrime.crimeValue.ToString()+"]?");
 
         //Set the images on the case
-
+        animalImage.sprite = animalData.characterSprite;
+        animalNameText.text = animalData.CurrentName;
+        crimeImage.sprite = currentCaseData.CurrentCrime.sprite;
+        crimeNameText.text = currentCaseData.CurrentCrime.crimeText;
+        
+        
         //Play a papers shuffling sound
+
     }
 }
