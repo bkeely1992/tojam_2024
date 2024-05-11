@@ -1,8 +1,8 @@
 using Assets.Scripts.Data;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
 
 //The current Case in the scene
 public class Case : MonoBehaviour
@@ -28,21 +28,82 @@ public class Case : MonoBehaviour
     [SerializeField]
     private TMPro.TMP_Text crimeNameText;
 
+    [SerializeField]
+    private Transform visiblePosition, inactivePosition;
+
+    public float speed;
+    public float arrivalDistance;
+
+    public UnityEvent onCaseIsVisible;
+
+    private Vector3 targetPosition;
+
+    private enum State
+    {
+        visible, sliding_up, sliding_down, inactive, invalid
+    }
+    [SerializeField]
+    private State currentState = State.inactive;
+
+
+    private void Update()
+    {
+        switch(currentState)
+        {
+            case State.visible:
+                break;
+            case State.sliding_up:
+                transform.position += (targetPosition - transform.position).normalized * speed *Time.deltaTime;
+                if(Vector3.Distance(targetPosition, transform.position) < arrivalDistance)
+                {
+                    currentState = State.visible;
+                    onCaseIsVisible.Invoke();
+                }
+                break;
+            case State.sliding_down:
+                
+                transform.position += (targetPosition - transform.position).normalized * speed * Time.deltaTime;
+                if(Vector3.Distance(targetPosition, transform.position) < arrivalDistance)
+                {
+                    currentState = State.inactive;
+                }
+                break;
+            case State.inactive:
+                break;
+        }
+
+    }
+
     //Activates the case and shows it
-    public void Activate(CaseData inCaseData)
+    public void SetNextCase(CaseData inCaseData)
     {
         currentCaseData = inCaseData;
         animalData = currentCaseData.CurrentAnimal;
-        Debug.Log("Animal["+animalData.Species.ToString()+"] did crime["+currentCaseData.CurrentCrime.crimeValue.ToString()+"]?");
+    }
+
+    public void ShowCase()
+    {
+        //Play a papers shuffling sound
 
         //Set the images on the case
         animalImage.sprite = animalData.characterSprite;
         animalNameText.text = animalData.CurrentName;
         crimeImage.sprite = currentCaseData.CurrentCrime.sprite;
         crimeNameText.text = currentCaseData.CurrentCrime.crimeText;
-        
-        
-        //Play a papers shuffling sound
+        currentState = State.sliding_up;
 
+        targetPosition = visiblePosition.position;
+    }
+
+    public void Complete()
+    {
+
+        targetPosition = inactivePosition.position;
+        currentState = State.sliding_down;
+        
+        currentCaseData = null;
+        animalData = null;
+
+        //Play sound of a stamp?
     }
 }

@@ -69,16 +69,35 @@ public class CaseManager : MonoBehaviour
     private List<CrimeData> allCrimeData = new List<CrimeData>();
     private Dictionary<CrimeData.Crime, CrimeData> crimeDataMap = new Dictionary<CrimeData.Crime, CrimeData>();
 
+    [SerializeField]
+    private GameObject decisionButtonsHolder;
+
+    [SerializeField]
+    private List<DialogueData> basePossibleGreetings;
+    [SerializeField]
+    private List<DialogueData> basePossibleCorrectGuiltyReactions;
+    [SerializeField]
+    private List<DialogueData> basePossibleIncorrectGuiltyReactions;
+    [SerializeField]
+    private List<DialogueData> basePossibleCorrectInnocentReactions;
+    [SerializeField]
+    private List<DialogueData> basePossibleIncorrectInnocentReactions;
+
+    [SerializeField]
+    private float chanceToShowReaction = 0.5f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        currentAnimal.onArrival.AddListener(StartNextCase);
+        currentCase.onCaseIsVisible.AddListener(ShowDecisionButtons);
         currentNumberOfCases = baseNumberOfCases;
         currentNumberOfExceptions = baseNumberOfExceptions;
 
         foreach(AnimalData animal in allAnimalData)
         {
+            animal.AddToReactionPool(basePossibleGreetings, basePossibleCorrectGuiltyReactions, basePossibleIncorrectGuiltyReactions, basePossibleCorrectInnocentReactions, basePossibleIncorrectInnocentReactions);
             animalDataMap.Add(animal.Species, animal);
         }
         foreach(CrimeData crime in allCrimeData)
@@ -93,6 +112,13 @@ public class CaseManager : MonoBehaviour
         {
             animalClassMap.Add(animalClass.animalClass, animalClass);
         }
+
+    }
+
+    private void OnDestroy()
+    {
+        currentAnimal.onArrival.RemoveListener(StartNextCase);
+        currentCase.onCaseIsVisible.RemoveListener(ShowDecisionButtons);
     }
 
     public void GenerateExceptionsForDay(int dayIndex)
@@ -141,7 +167,6 @@ public class CaseManager : MonoBehaviour
             }
             if(!exceptionExists)
             {
-                Debug.Log("Adding exception for crime["+currentException.crime.ToString()+"] for species["+currentException.speciesException.ToString()+"] class["+currentException.classException.ToString()+"] diet["+currentException.dietException.ToString()+"]");
                 dailyExceptions.Add(currentException);
             }
         }
@@ -163,8 +188,7 @@ public class CaseManager : MonoBehaviour
         }
 
         currentNumberOfCases += numberOfCasesDayIncrement;
-
-        currentCase.Activate(queuedCases.Dequeue());
+        currentCase.SetNextCase(queuedCases.Dequeue());
         currentAnimal.Generate(currentCase);
     }
 
@@ -222,14 +246,37 @@ public class CaseManager : MonoBehaviour
             strikes++;
             strikesText.text = "Strikes: " + strikes.ToString();
         }
-        else
+
+        if (Random.Range(0f, 1.0f) <= chanceToShowReaction)
         {
-            //Player guessed correctly
-            
+            if (submittedGuilty)
+            {
+                currentAnimal.ShowDialogue(currentAnimal.GetGuiltyReaction(isGuilty == submittedGuilty));
+            }
+            else
+            {
+                currentAnimal.ShowDialogue(currentAnimal.GetInnocentReaction(isGuilty == submittedGuilty));
+            }
         }
-        currentCase.Activate(queuedCases.Dequeue());
+
+        currentCase.Complete();
+        currentCase.SetNextCase(queuedCases.Dequeue());
         currentAnimal.Generate(currentCase);
         currentAnimal.Leave();
+        HideDecisionButtons();
+    }
 
+    public void StartNextCase()
+    {
+        currentCase.ShowCase();
+    }
+
+    public void ShowDecisionButtons()
+    {
+        decisionButtonsHolder.SetActive(true);
+    }
+    public void HideDecisionButtons()
+    {
+        decisionButtonsHolder.SetActive(false);
     }
 }
