@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CaseManager caseManager;
 
+    [SerializeField]
+    private ComputerDatabase computer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +38,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.A))
+            computer.ChangeScreen(ComputerDatabase.screen.runner);
+        else if (Input.GetKeyUp(KeyCode.E))
+            computer.ChangeScreen(ComputerDatabase.screen.exceptions);
     }
 
     public void StartDay()
