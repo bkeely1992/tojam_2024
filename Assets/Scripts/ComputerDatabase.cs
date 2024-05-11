@@ -31,7 +31,6 @@ public class ComputerDatabase : MonoBehaviour
 
         foreach (CrimeExceptionData exception in exceptions)
         {
-
             GameObject spawnedExceptionObject = GameObject.Instantiate(computerExceptionPrefab, computerExceptionsParent);
             ComputerException spawnedException = spawnedExceptionObject.GetComponent<ComputerException>();
             spawnedException.SetImages(exception.animalSprite, exception.crimeSprite);
