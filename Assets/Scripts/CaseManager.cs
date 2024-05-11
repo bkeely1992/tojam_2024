@@ -86,6 +86,9 @@ public class CaseManager : MonoBehaviour
     [SerializeField]
     private float chanceToShowReaction = 0.5f;
 
+    [SerializeField]
+    private Rulebook rulebook;
+
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +97,8 @@ public class CaseManager : MonoBehaviour
         currentCase.onCaseIsVisible.AddListener(ShowDecisionButtons);
         currentNumberOfCases = baseNumberOfCases;
         currentNumberOfExceptions = baseNumberOfExceptions;
+
+        rulebook.PopulateExceptions(rulebookExceptions);
 
         foreach(AnimalData animal in allAnimalData)
         {
@@ -141,7 +146,7 @@ public class CaseManager : MonoBehaviour
             {
                 case ExceptionType.animal_species:
                     currentException.speciesException = AnimalData.AllAnimalSpecies[Random.Range(0, AnimalData.AllAnimalSpecies.Count)];
-                    currentException.animalSprite = animalDataMap[currentException.speciesException].characterSprite;
+                    currentException.animalSprite = animalDataMap[currentException.speciesException].caseFileSprite;
                     break;
                 case ExceptionType.animal_class:
                     currentException.classException = AnimalData.AllAnimalClasses[Random.Range(0, AnimalData.AllAnimalClasses.Count)];
