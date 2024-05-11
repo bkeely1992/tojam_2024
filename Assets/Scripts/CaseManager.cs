@@ -14,6 +14,7 @@ public class CaseManager : MonoBehaviour
     //The cases that are currently queued for the current day
     public Queue<CaseData> queuedCases = new Queue<CaseData>();
 
+    public int MaxStrikeCount = 10;
     //Properties used for dictating how many cases and exceptions there are per day
     public int baseNumberOfCases = 4;
     public int numberOfCasesDayIncrement = 1;
@@ -249,7 +250,7 @@ public class CaseManager : MonoBehaviour
     {
         if (AuthoredCaseDb.Cases == null || AuthoredCaseDb.Cases.Count == 0) return new List<AuthoredCase>();
 
-        return AuthoredCaseDb.Cases.Where(x => (x.DayRanges.x < dayIndex && x.DayRanges.y >= dayIndex) || x.NoDayRange).ToList();
+        return AuthoredCaseDb.Cases.Where(x => (x.DayRanges.x <= dayIndex && x.DayRanges.y >= dayIndex) || x.NoDayRange).ToList();
     }
     
     private CaseData GenerateRandomCase(int dayIndex)
@@ -273,7 +274,7 @@ public class CaseManager : MonoBehaviour
 
     private bool DoesTheAuthoredCaseValid(AuthoredCase x, int dayIndex)
     {
-        return ((x.DayRanges.x < dayIndex && x.DayRanges.y >= dayIndex) || x.NoDayRange) &&
+        return ((x.DayRanges.x <= dayIndex && x.DayRanges.y >= dayIndex) || x.NoDayRange) &&
                !addedAuthoredCasesToCurrentDay.Contains(x.GimmeYourGuid());
     }
     #endregion
@@ -347,10 +348,38 @@ public class CaseManager : MonoBehaviour
         }
 
         currentCase.Complete();
-        currentCase.SetNextCase(queuedCases.Dequeue());
-        currentAnimal.Generate(currentCase);
+        if (strikes >= MaxStrikeCount)
+        {
+            currentAnimal.Generate(null);
+            WeAreInTheEndGameNow();
+        }
+        else if (!queuedCases.Any())
+        {
+            // No case for the day, end it
+            currentAnimal.Generate(null);
+            EndDayByFinishingCases();
+        }
+        else
+        {
+            // Next case
+            currentCase.SetNextCase(queuedCases.Dequeue());
+            currentAnimal.Generate(currentCase);
+        }
+
         currentAnimal.Leave();
         HideDecisionButtons();
+    }
+
+    private void WeAreInTheEndGameNow()
+    {
+        FindObjectOfType<GameManager>().EndGame();
+    }
+    
+    // End day if we are out of time or out of cases in hand
+    private void EndDayByFinishingCases()
+    {
+        FindObjectOfType<GameManager>().EndDay();
+        Debug.Log("DAY OVER");
     }
 
     public void StartNextCase()

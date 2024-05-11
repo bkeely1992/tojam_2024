@@ -1,6 +1,7 @@
 using Assets.Scripts.Data;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -162,6 +163,7 @@ public class Animal : MonoBehaviour
         {
             possibleResponses = currentCase.CurrentCaseData.CurrentAnimal.PossibleIncorrectInnocentReactions;
         }
+        if(possibleResponses.Count==0) return null; // null is handled in show dialogue function
         return possibleResponses[Random.Range(0, possibleResponses.Count)];
     }
 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AuthoredCaseDatabase
   m_EditorClassIdentifier: 
   Cases:
-  - NoDayRange: 1
-    DayRanges: {x: 0, y: 0}
+  - NoDayRange: 0
+    DayRanges: {x: 0, y: 1}
     Animal:
       characterSprite: {fileID: 21300000, guid: 83af408897a62ea4a869914482a152be, type: 3}
       caseFileSprite: {fileID: 21300000, guid: 1ca75882d7376db4bab3dc9381d242cd, type: 3}
