@@ -156,6 +156,7 @@ public class CaseManager : MonoBehaviour
             CrimeExceptionData currentException = new CrimeExceptionData();
             currentException.crime = currentCrime;
             currentException.crimeSprite = crimeDataMap[currentException.crime].sprite;
+            currentException.crimeName = crimeDataMap[currentException.crime].crimeText;
             switch (currentExceptionType)
             {
                 case ExceptionType.animal_species:

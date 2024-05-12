@@ -1,6 +1,8 @@
 using Assets.Scripts.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 //Script used for managing the details of the visualization of the computer database in-game
@@ -11,12 +13,18 @@ public class ComputerDatabase : MonoBehaviour
         live, confirming, screensaver, login, game, invalid
     }
     private State currentState = State.login;
+    [SerializeField]
+    private GameObject computerExceptionsPageObject;
 
     [SerializeField]
     private Transform computerExceptionsParent;
 
     [SerializeField]
     private GameObject computerExceptionPrefab;
+    [SerializeField]
+    private Transform computerExceptionButtonsParent;
+    [SerializeField]
+    private GameObject computerExceptionButtonPrefab;
 
     [SerializeField]
     private Screensaver screensaver;
@@ -46,6 +54,8 @@ public class ComputerDatabase : MonoBehaviour
     private float timeWaiting = 0.0f;
     private GameObject currentMinigameObject;
 
+    private Dictionary<CrimeData.Crime, GameObject> crimeExceptionCategoryObjectMap = new Dictionary<CrimeData.Crime, GameObject>();
+
     private void Start()
     {
         confirmationStartingPosition = confirmationParent.transform.position;
@@ -71,7 +81,7 @@ public class ComputerDatabase : MonoBehaviour
                     {
                         confirmationOption.SetActive(false);
                     }
-                    confirmationOptions[Random.Range(0, confirmationOptions.Count)].SetActive(true);
+                    confirmationOptions[UnityEngine.Random.Range(0, confirmationOptions.Count)].SetActive(true);
                     confirmationParent.SetActive(true);
                     currentState = State.confirming;
                 }
@@ -93,19 +103,69 @@ public class ComputerDatabase : MonoBehaviour
         {
             DestroyImmediate(computerExceptionsParent.GetChild(0).gameObject);
         }
+        while (computerExceptionButtonsParent.childCount > 0)
+        {
+            DestroyImmediate(computerExceptionButtonsParent.GetChild(0).gameObject);
+        }
+        Dictionary<CrimeData.Crime, List<Sprite>> crimeExceptionMap = new Dictionary<CrimeData.Crime, List<Sprite>>();
+        Dictionary<CrimeData.Crime, Sprite> crimeSpriteMap = new Dictionary<CrimeData.Crime, Sprite>();
+        Dictionary<CrimeData.Crime, string> crimeNameMap = new Dictionary<CrimeData.Crime, string>();
 
         foreach (CrimeExceptionData exception in exceptions)
         {
+            if(!crimeExceptionMap.ContainsKey(exception.crime))
+            {
+                crimeExceptionMap.Add(exception.crime, new List<Sprite>());
+                crimeSpriteMap.Add(exception.crime, exception.crimeSprite);
+                crimeNameMap.Add(exception.crime, exception.crimeName);
+            }
+            crimeExceptionMap[exception.crime].Add(exception.animalSprite);
+        }
+        crimeExceptionCategoryObjectMap.Clear();
+
+        bool isFirst = true;
+        foreach (KeyValuePair<CrimeData.Crime, List<Sprite>> crime in crimeExceptionMap)
+        {
+
+            //For each crime, create a button
+            GameObject spawnedCrimeButtonObject = Instantiate(computerExceptionButtonPrefab, computerExceptionButtonsParent);
+            CrimeExceptionButton crimeButton = spawnedCrimeButtonObject.GetComponent<CrimeExceptionButton>();
+
+            
+            //Add listener for the button
+            crimeButton.onPress.AddListener(OnCrimeButtonPress);
+            crimeButton.crime = crime.Key;
+            crimeButton.crimeButtonImage.sprite = crimeSpriteMap[crime.Key];
+
+            //Then create a page
             GameObject spawnedExceptionObject = GameObject.Instantiate(computerExceptionPrefab, computerExceptionsParent);
             ComputerException spawnedException = spawnedExceptionObject.GetComponent<ComputerException>();
-            spawnedException.SetImages(exception.animalSprite, exception.crimeSprite);
+            spawnedException.Initialize(crimeNameMap[crime.Key], crimeSpriteMap[crime.Key], crime.Value);
+
+            if (isFirst)
+            {
+                spawnedExceptionObject.SetActive(true);
+                isFirst = false;
+            }
+
+            //Add to the map
+            crimeExceptionCategoryObjectMap.Add(crime.Key, spawnedExceptionObject);
         }
+    }
+
+    private void OnCrimeButtonPress(CrimeData.Crime crime)
+    {
+        foreach(KeyValuePair<CrimeData.Crime, GameObject> crimeCategoryObject in crimeExceptionCategoryObjectMap)
+        {
+            crimeCategoryObject.Value.SetActive(false);
+        }
+        crimeExceptionCategoryObjectMap[crime].SetActive(true);
     }
 
     public void PressLogin()
     {
         loginParent.SetActive(false);
-        currentMinigameObject = Instantiate(minigamePrefabs[Random.Range(0, minigamePrefabs.Count)], computerMiniGameParent);
+        currentMinigameObject = Instantiate(minigamePrefabs[UnityEngine.Random.Range(0, minigamePrefabs.Count)], computerMiniGameParent);
         Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
         minigame.onLose.AddListener(LoseGame);
         minigame.onWin.AddListener(CompleteGame);
@@ -123,7 +183,7 @@ public class ComputerDatabase : MonoBehaviour
     public void PressNo()
     {
         timeWaiting = 0.0f;
-        computerExceptionsParent.gameObject.SetActive(false);
+        computerExceptionsPageObject.SetActive(false);
         confirmationParent.SetActive(false);
         screensaver.gameObject.SetActive(true);
         currentState = State.screensaver;
@@ -149,7 +209,7 @@ public class ComputerDatabase : MonoBehaviour
         Destroy(currentMinigameObject);
         
         computerMiniGameParent.gameObject.SetActive(false);
-        computerExceptionsParent.gameObject.SetActive(true);
+        computerExceptionsPageObject.SetActive(true);
         currentState = State.live;
     }
 
@@ -172,7 +232,7 @@ public class ComputerDatabase : MonoBehaviour
 
         timeWaiting = 0.0f;
         computerMiniGameParent.gameObject.SetActive(false);
-        computerExceptionsParent.gameObject.SetActive(false);
+        computerExceptionsPageObject.SetActive(false);
         confirmationParent.SetActive(false);
         loginParent.SetActive(false);
         

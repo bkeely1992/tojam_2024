@@ -62,8 +62,8 @@ public class Rulebook : MonoBehaviour
                 continue;
             }
             GameObject spawnedExceptionObject = GameObject.Instantiate(rulebookExceptionPrefab, spawnParent);
-            ComputerException spawnedException = spawnedExceptionObject.GetComponent<ComputerException>();
-            spawnedException.SetImages(exception.animalSprite, exception.crimeSprite);
+            RulebookException spawnedException = spawnedExceptionObject.GetComponent<RulebookException>();
+            spawnedException.Initialize(exception.animalSprite, exception.crimeSprite);
         }
     }
 

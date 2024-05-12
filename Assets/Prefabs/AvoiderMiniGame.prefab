@@ -256,7 +256,7 @@ MonoBehaviour:
   obstaclesParent: {fileID: 7983384524588284170}
   spawnRate: 1
   characterPrefab: {fileID: 6735217708534532611}
-  duration: 10
+  duration: 8
   screen: {fileID: 5754206138207650623, guid: 2aa174b4be3e037449d56284e569ac42, type: 3}
   gameOverText: {fileID: 1272792435773166060}
   topLane: {fileID: 9005384943639510300}

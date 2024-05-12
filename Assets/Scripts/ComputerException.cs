@@ -7,14 +7,25 @@ using UnityEngine.UI;
 public class ComputerException : MonoBehaviour
 {
     [SerializeField]
-    private Image animalImage;
+    private TMPro.TMP_Text crimeNameText;
 
     [SerializeField]
     private Image crimeImage;
+
+    [SerializeField]
+    private GameObject animalExceptionPrefab;
+    [SerializeField]
+    private Transform animalExceptionsHolder;
     
-    public void SetImages(Sprite animalSprite, Sprite crimeSprite)
+    public void Initialize(string crimeName, Sprite crimeSprite, List<Sprite> animalSprites)
     {
-        animalImage.sprite = animalSprite;
+        crimeNameText.text = crimeName;
         crimeImage.sprite = crimeSprite;
+        foreach(Sprite animalSprite in animalSprites)
+        {
+            GameObject animalExceptionObject = Instantiate(animalExceptionPrefab, animalExceptionsHolder);
+            Image animalExceptionImage = animalExceptionObject.GetComponent<Image>();
+            animalExceptionImage.sprite = animalSprite;
+        }
     }
 }

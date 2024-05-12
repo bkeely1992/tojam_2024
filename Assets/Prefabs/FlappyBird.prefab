@@ -62,7 +62,7 @@ MonoBehaviour:
   - {fileID: 6064885723588971509, guid: 65a5602798ef88345a6d41ba806aecee, type: 3}
   spawnRate: 1
   pipeParent: {fileID: 2707484439105247389}
-  duration: 10
+  duration: 8
   screen: {fileID: 5754206138207650623, guid: 2aa174b4be3e037449d56284e569ac42, type: 3}
   gameOverText: {fileID: 2053547911320384559}
 --- !u!61 &7936297781042963959

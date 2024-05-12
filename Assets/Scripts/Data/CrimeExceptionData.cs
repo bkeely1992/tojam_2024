@@ -22,5 +22,6 @@ namespace Assets.Scripts.Data
 
         public Sprite crimeSprite;
         public Sprite animalSprite;
+        public string crimeName;
     }
 }
