@@ -20,6 +20,7 @@ MonoBehaviour:
       caseFileSprite: {fileID: 21300000, guid: 1ca75882d7376db4bab3dc9381d242cd, type: 3}
       dietSprite: {fileID: 21300000, guid: 77c399d176cb3fe43a58c4f402748186, type: 3}
       classSprite: {fileID: 21300000, guid: ca66de0553135aa4ba29e19286bc2881, type: 3}
+      dialogueSound: dialogue_mumbling1
       Class: 0
       Diet: 0
       Species: 0

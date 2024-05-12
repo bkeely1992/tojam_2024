@@ -91,6 +91,7 @@ public class ComputerDatabase : MonoBehaviour
                     confirmationOptions[UnityEngine.Random.Range(0, confirmationOptions.Count)].SetActive(true);
                     confirmationParent.SetActive(true);
                     currentState = State.confirming;
+                    AudioManager.Instance.PlaySound("confirmation_warning");
                 }
                 break;
             case State.confirming:
@@ -165,7 +166,8 @@ public class ComputerDatabase : MonoBehaviour
 
     private void OnCrimeButtonPress(CrimeData.Crime crime)
     {
-        foreach(KeyValuePair<CrimeData.Crime, GameObject> crimeCategoryObject in crimeExceptionCategoryObjectMap)
+        AudioManager.Instance.PlaySound("button_press", true);
+        foreach (KeyValuePair<CrimeData.Crime, GameObject> crimeCategoryObject in crimeExceptionCategoryObjectMap)
         {
             crimeExceptionButtonImageMap[crimeCategoryObject.Key].color = baseButtonColour;
             crimeCategoryObject.Value.SetActive(false);
@@ -176,6 +178,7 @@ public class ComputerDatabase : MonoBehaviour
 
     public void PressLogin()
     {
+        AudioManager.Instance.PlaySound("button_press", true);
         loginParent.SetActive(false);
         currentMinigameObject = Instantiate(minigamePrefabs[UnityEngine.Random.Range(0, minigamePrefabs.Count)], computerMiniGameParent);
         Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
@@ -187,6 +190,7 @@ public class ComputerDatabase : MonoBehaviour
 
     public void PressConfirmation()
     {
+        AudioManager.Instance.PlaySound("button_press", true);
         confirmationParent.SetActive(false);
         timeWaiting = 0.0f;
         currentState = State.live;
@@ -194,6 +198,7 @@ public class ComputerDatabase : MonoBehaviour
 
     public void PressNo()
     {
+        AudioManager.Instance.PlaySound("button_press", true);
         timeWaiting = 0.0f;
         computerExceptionsPageObject.SetActive(false);
         confirmationParent.SetActive(false);
@@ -211,6 +216,7 @@ public class ComputerDatabase : MonoBehaviour
         computerMiniGameParent.gameObject.SetActive(false);
         loginParent.SetActive(true);
         currentState = State.login;
+        AudioManager.Instance.PlaySound("minigame_lose");
     }
 
     public void CompleteGame()
@@ -223,6 +229,7 @@ public class ComputerDatabase : MonoBehaviour
         computerMiniGameParent.gameObject.SetActive(false);
         computerExceptionsPageObject.SetActive(true);
         currentState = State.live;
+        AudioManager.Instance.PlaySound("minigame_win");
     }
 
     public void EndScreensaver()

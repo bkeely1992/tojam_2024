@@ -70,6 +70,7 @@ public class Rulebook : MonoBehaviour
 
     public void SetClassTab()
     {
+        AudioManager.Instance.PlaySound("page_flip", true);
         dietExceptionsHolderObject.SetActive(false);
         speciesExceptionsHolderObject.SetActive(false);
         classExceptionsHolderObject.SetActive(true);
@@ -77,6 +78,7 @@ public class Rulebook : MonoBehaviour
     }
     public void SetDietTab()
     {
+        AudioManager.Instance.PlaySound("page_flip", true);
         classExceptionsHolderObject.SetActive(false);
         speciesExceptionsHolderObject.SetActive(false);
         dietExceptionsHolderObject.SetActive(true);
@@ -85,6 +87,7 @@ public class Rulebook : MonoBehaviour
 
     public void SetSpeciesTab()
     {
+        AudioManager.Instance.PlaySound("page_flip", true);
         dietExceptionsHolderObject.SetActive(false);
         classExceptionsHolderObject.SetActive(false);
         speciesExceptionsHolderObject.SetActive(true);

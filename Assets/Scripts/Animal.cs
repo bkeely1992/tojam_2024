@@ -63,6 +63,7 @@ public class Animal : MonoBehaviour
             case State.off_screen:
                 if(currentCase != null)
                 {
+                    AudioManager.Instance.PlaySound("animal_approaching", true);
                     //Set the sprite
                     bodyImage.sprite = currentCase.CurrentCaseData.CurrentAnimal.characterSprite;
 
@@ -105,6 +106,7 @@ public class Animal : MonoBehaviour
                 timeRemainingToWait -= Time.deltaTime;
                 if(timeRemainingToWait <= 0)
                 {
+                    AudioManager.Instance.PlaySound("animal_approaching", true);
                     if (guiltyChosen)
                     {
                         currentState = State.guilty;
@@ -160,6 +162,7 @@ public class Animal : MonoBehaviour
     public void ShowDialogue(DialogueData inDialogue)
     {
         if (inDialogue == null) return; // Early return if there are no valid dialogue
+        AudioManager.Instance.PlaySound(currentCase.CurrentCaseData.CurrentAnimal.dialogueSound);
         dialogueText.text = inDialogue.textValue;
         dialogueContainerObject.SetActive(true);
         timeRemainingToShowDialogue = inDialogue.duration;

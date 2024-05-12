@@ -87,7 +87,7 @@ public class Case : MonoBehaviour
     public void ShowCase()
     {
         //Play a papers shuffling sound
-
+        AudioManager.Instance.PlaySound("paper_slide");
         //Set the images on the case
         animalImage.sprite = animalData.characterSprite;
         animalNameText.text = animalData.CurrentName;
@@ -102,13 +102,11 @@ public class Case : MonoBehaviour
 
     public void Complete()
     {
-
+        AudioManager.Instance.PlaySound("paper_slide2");
         targetPosition = inactivePosition.position;
         currentState = State.sliding_down;
         
         currentCaseData = null;
         animalData = null;
-
-        //Play sound of a stamp?
     }
 }

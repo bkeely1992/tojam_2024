@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5807188770108945039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7622897290525234245}
+  - component: {fileID: 4885827322161319852}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7622897290525234245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5807188770108945039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4885827322161319852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5807188770108945039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3ab0692c8d2be47b38b90dc75202b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - name: button_press
+    clip: {fileID: 8300000, guid: 49cd0ab35fd457c4a9f89aa704f3245e, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: confirmation_warning
+    clip: {fileID: 8300000, guid: 6fc5cad49ffe5bf4f9d496d85fdb4d25, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: day_complete
+    clip: {fileID: 8300000, guid: d94d064c00633314dac57e21f9e72187, type: 3}
+    volume: 0.6
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: dialogue_mumbling1
+    clip: {fileID: 8300000, guid: 9d80a86d739f7564e86f98ecce7956b3, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: dialogue_mumbling2
+    clip: {fileID: 8300000, guid: 1e62b071cdcd70d4e846bc7b936df477, type: 3}
+    volume: 0.75
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: dialogue_mumbling3
+    clip: {fileID: 8300000, guid: 1eb5e54bf2d0752439e1e1b9109595da, type: 3}
+    volume: 0.75
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: game_over
+    clip: {fileID: 8300000, guid: 61653ce00740fbb468d757b54ec6df41, type: 3}
+    volume: 0.75
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: minigame_lose
+    clip: {fileID: 8300000, guid: 13c525877e873ad438bdb9d70f2fbf6a, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: minigame_win
+    clip: {fileID: 8300000, guid: 9f9b39f0fc84fc945b0350395199f9f5, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: page_flip
+    clip: {fileID: 8300000, guid: cfaf63c4015a99c49bd2a2f9a2678e5d, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: paper_slide
+    clip: {fileID: 8300000, guid: e5f8164083beb8349ba256731b0a520f, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: paper_slide2
+    clip: {fileID: 8300000, guid: 7983337eb5c3a9a40a7f27f5c6210c94, type: 3}
+    volume: 0.75
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: stamp
+    clip: {fileID: 8300000, guid: 672cc965b8defe942beebdee2888b178, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: strike
+    clip: {fileID: 8300000, guid: 7c843e2cb665e3c4e92bde4410eba43b, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: time_expiring
+    clip: {fileID: 8300000, guid: b425c0ec2e69ed84b9b997ea126f9d46, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0
+  - name: animal_approaching
+    clip: {fileID: 8300000, guid: cc63f00560674964ba05065a799cb4e0, type: 3}
+    volume: 1
+    pitch: 1
+    looping: 0
+    source: {fileID: 0}
+    type: 0

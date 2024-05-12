@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Clock clock;
+
+    private bool hasWarnedOnTime = false;
     
     // Start is called before the first frame update
     void Start()
@@ -52,9 +54,15 @@ public class GameManager : MonoBehaviour
         {
             timeRemaining -= Time.deltaTime;
             timeRemaining = Mathf.Max(timeRemaining, 0f);
+            
             if (timeRemaining <= 0f)
             {
                 EndGame();
+            }
+            else if(!hasWarnedOnTime && timeRemaining <= 10f)
+            {
+                hasWarnedOnTime = true;
+                AudioManager.Instance.PlaySound("time_expiring");
             }
         }
     }
@@ -69,6 +77,7 @@ public class GameManager : MonoBehaviour
     
     public void StartDay()
     {
+        hasWarnedOnTime = false;
         clock.StartTimer(timeInDay);
         currentState = GameState.DAY_IS_RUNNING;
         timeRemaining = timeInDay;

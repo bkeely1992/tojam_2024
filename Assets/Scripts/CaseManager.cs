@@ -307,6 +307,7 @@ public class CaseManager : MonoBehaviour
 
     private void SubmitPlayerDecision(bool submittedGuilty)
     {
+        AudioManager.Instance.PlaySound("stamp");
         CrimeData.Crime currentCrime = currentCase.CurrentCaseData.CurrentCrime.crimeValue;
         AnimalData currentAnimalData = currentCase.CurrentCaseData.CurrentAnimal;
         bool isGuilty = true;
@@ -339,6 +340,7 @@ public class CaseManager : MonoBehaviour
         }
         if(isGuilty != submittedGuilty)
         {
+            AudioManager.Instance.PlaySound("strike");
             //Player guessed incorrectly
             strikes++;
             strikeObjectMap[strikes].SetStrikeObjectVisibility(true);
@@ -347,6 +349,7 @@ public class CaseManager : MonoBehaviour
 
         if (Random.Range(0f, 1.0f) <= chanceToShowReaction)
         {
+            
             if (submittedGuilty)
             {
                 currentAnimal.ShowDialogue(currentAnimal.GetGuiltyReaction(isGuilty == submittedGuilty));
@@ -363,12 +366,14 @@ public class CaseManager : MonoBehaviour
         {
             currentAnimal.Generate(null);
             WeAreInTheEndGameNow();
+            
         }
         else if (!queuedCases.Any())
         {
             // No case for the day, end it
             currentAnimal.Generate(null);
             EndDayByFinishingCases();
+
         }
         else
         {
@@ -383,6 +388,7 @@ public class CaseManager : MonoBehaviour
 
     private void WeAreInTheEndGameNow()
     {
+        AudioManager.Instance.PlaySound("game_over");
         FindObjectOfType<GameManager>().EndGame();
     }
     
@@ -391,7 +397,7 @@ public class CaseManager : MonoBehaviour
     {
         computerDatabase.ResetComputer();
         FindObjectOfType<GameManager>().EndDay();
-        Debug.Log("DAY OVER");
+        AudioManager.Instance.PlaySound("day_complete");
     }
 
     public void StartNextCase()

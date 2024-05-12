@@ -15,6 +15,7 @@ namespace Assets.Scripts.Data
         public Sprite caseFileSprite;
         public Sprite dietSprite;
         public Sprite classSprite;
+        public string dialogueSound;
 
         public enum Animal_class
         {

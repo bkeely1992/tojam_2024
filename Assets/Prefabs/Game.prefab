@@ -1575,6 +1575,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 1ca75882d7376db4bab3dc9381d242cd, type: 3}
     dietSprite: {fileID: 21300000, guid: 77c399d176cb3fe43a58c4f402748186, type: 3}
     classSprite: {fileID: 21300000, guid: ca66de0553135aa4ba29e19286bc2881, type: 3}
+    dialogueSound: dialogue_mumbling1
     Class: 0
     Diet: 0
     Species: 0
@@ -1591,6 +1592,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 6a7ec99ceab88eb4e8efb0766e2d85b4, type: 3}
     dietSprite: {fileID: 21300000, guid: 77c399d176cb3fe43a58c4f402748186, type: 3}
     classSprite: {fileID: 21300000, guid: ca66de0553135aa4ba29e19286bc2881, type: 3}
+    dialogueSound: dialogue_mumbling1
     Class: 0
     Diet: 0
     Species: 1
@@ -1607,6 +1609,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 21a8df2ecc6ea4f4f873c049c9879d12, type: 3}
     dietSprite: {fileID: 21300000, guid: d1234b2a68ce1d14692150264f16c05b, type: 3}
     classSprite: {fileID: 21300000, guid: ca66de0553135aa4ba29e19286bc2881, type: 3}
+    dialogueSound: dialogue_mumbling3
     Class: 0
     Diet: 1
     Species: 2
@@ -1623,6 +1626,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 646569a93b7a8554d8779fbfa4353c7d, type: 3}
     dietSprite: {fileID: 21300000, guid: 77c399d176cb3fe43a58c4f402748186, type: 3}
     classSprite: {fileID: 21300000, guid: 5fed9f9fdc59ae6458a09762f16362b0, type: 3}
+    dialogueSound: dialogue_mumbling1
     Class: 1
     Diet: 0
     Species: 3
@@ -1639,6 +1643,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 91e4012e0090589439d92bd342347eec, type: 3}
     dietSprite: {fileID: 21300000, guid: d1234b2a68ce1d14692150264f16c05b, type: 3}
     classSprite: {fileID: 21300000, guid: 5fed9f9fdc59ae6458a09762f16362b0, type: 3}
+    dialogueSound: dialogue_mumbling2
     Class: 1
     Diet: 1
     Species: 4
@@ -1655,6 +1660,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 73575808ecf4b7e43a2d748b41196b95, type: 3}
     dietSprite: {fileID: 21300000, guid: d1234b2a68ce1d14692150264f16c05b, type: 3}
     classSprite: {fileID: 21300000, guid: 5fed9f9fdc59ae6458a09762f16362b0, type: 3}
+    dialogueSound: dialogue_mumbling3
     Class: 1
     Diet: 1
     Species: 5
@@ -1671,6 +1677,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: c7eacbd725d6a3a4dba1e4f8d0d27c99, type: 3}
     dietSprite: {fileID: 21300000, guid: 890c5e6bc17a689439f0596ee10124e2, type: 3}
     classSprite: {fileID: 21300000, guid: 9f64b62ee37875242b70def8389369e4, type: 3}
+    dialogueSound: dialogue_mumbling2
     Class: 2
     Diet: 2
     Species: 6
@@ -1687,6 +1694,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 05e1b6db00a76684b9f71d2aaca4840c, type: 3}
     dietSprite: {fileID: 21300000, guid: d1234b2a68ce1d14692150264f16c05b, type: 3}
     classSprite: {fileID: 21300000, guid: 9f64b62ee37875242b70def8389369e4, type: 3}
+    dialogueSound: dialogue_mumbling1
     Class: 2
     Diet: 1
     Species: 7
@@ -1703,6 +1711,7 @@ MonoBehaviour:
     caseFileSprite: {fileID: 21300000, guid: 5b43e1c29c6e3a44ab4013ec8c984398, type: 3}
     dietSprite: {fileID: 21300000, guid: 77c399d176cb3fe43a58c4f402748186, type: 3}
     classSprite: {fileID: 21300000, guid: 9f64b62ee37875242b70def8389369e4, type: 3}
+    dialogueSound: dialogue_mumbling2
     Class: 2
     Diet: 0
     Species: 8
