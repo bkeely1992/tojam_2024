@@ -40,6 +40,9 @@ public class ComputerDatabase : MonoBehaviour
     private int loggingInScreenDelayTime;
     [SerializeField] 
     private GameObject loggingInScreen;
+    
+    [SerializeField] 
+    private GameObject captchaLoggingInScreen;
 
     [SerializeField]
     private GameObject loginParent;
@@ -191,20 +194,23 @@ public class ComputerDatabase : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("button_press", true);
         loginParent.SetActive(false);
-        var loginCount = FindObjectOfType<GameManager>().totalLoginCount;
-        if (loginCount > 2 && Random.Range(0,2)==0) // Show captcha only after the second time we log in and pick it randomly
+        var loginCount = FindObjectOfType<GameManager>().IncreaseLoginCountAndReturnTheResult();
+        if (loginCount > 0 && Random.Range(0,8)!=7) // Show captcha only after the second time we log in and pick it randomly 20% to not show 
         {
             ShowCaptchaLogin();
         }
         else
         {
-            JustLogThemIn();
+            StartCoroutine(JustLogThemIn());
 
         }
     }
 
-    public void JustLogThemIn()
+    public IEnumerator JustLogThemIn()
     {
+        loggingInScreen.SetActive(true);
+        yield return new WaitForSeconds(loggingInScreenDelayTime);
+        loggingInScreen.SetActive(false);
         computerExceptionsPageObject.SetActive(true);
         currentState = State.live;
     }
@@ -220,10 +226,6 @@ public class ComputerDatabase : MonoBehaviour
         captchaWarningScreen.SetActive(true);
         yield return new WaitForSeconds(captchaScreenDelayTime);
         captchaWarningScreen.SetActive(false);
-        
-        loggingInScreen.SetActive(true);
-        yield return new WaitForSeconds(loggingInScreenDelayTime);
-        loggingInScreen.SetActive(false);
         
         currentMinigameObject = Instantiate(minigamePrefabs[UnityEngine.Random.Range(0, minigamePrefabs.Count)], computerMiniGameParent);
         Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
@@ -272,6 +274,15 @@ public class ComputerDatabase : MonoBehaviour
         Destroy(currentMinigameObject);
         
         computerMiniGameParent.gameObject.SetActive(false);
+        StartCoroutine(SwitchToExceptionScreen());
+    }
+
+    private IEnumerator SwitchToExceptionScreen()
+    {
+        captchaLoggingInScreen.SetActive(true);
+        yield return new WaitForSeconds(loggingInScreenDelayTime);
+        captchaLoggingInScreen.SetActive(false);
+        
         computerExceptionsPageObject.SetActive(true);
         currentState = State.live;
         AudioManager.Instance.PlaySound("minigame_win");
