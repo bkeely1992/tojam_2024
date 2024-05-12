@@ -123,32 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &321675299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 501291708299338448, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-  m_PrefabInstance: {fileID: 5004639080015275944}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &321675303
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321675299}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e5fa3773854f640aeb2a45c7303c7cd2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &864648606
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,73 +297,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2504325292818496956, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523037055482443046, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: walkingAnimator
-      value: 
-      objectReference: {fileID: 321675303}
-    - target: {fileID: 4340855676254802360, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: m_Color.a
-      value: 0.8862745
-      objectReference: {fileID: 0}
-    - target: {fileID: 6085976403282078127, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[0].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4f4266ac18fb1094e82569bf3e2349fd, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[1].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 13a3d13b01e3843489bd7120b39c16c8, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[2].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2d1ef7bf624f08348bc66c3d357c6588, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[3].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 19e6a8953a702bb4cb0f3448c2f49c0b, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[4].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 32ae4c152db0b69409e397d6b0768818, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[5].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e302eaec78887dc4593f219b0c9e2c67, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[6].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c75258d871f17f64288348beb4430f6d, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[7].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e6f2f6b77b2042b4d82b3b1ef4843743, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: allAnimalData.Array.data[8].caseFileSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 84f29f6c47e3371469280939a92730a3, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: rulebookExceptions.Array.data[1].animalSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 32ae4c152db0b69409e397d6b0768818, type: 3}
-    - target: {fileID: 7209921106681663530, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      propertyPath: rulebookExceptions.Array.data[3].animalSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 13a3d13b01e3843489bd7120b39c16c8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 501291708299338448, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 321675303}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1219e6c1bce8bb4ebd7fa6af46c4701, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
