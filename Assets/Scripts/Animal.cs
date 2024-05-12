@@ -58,7 +58,9 @@ public class Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(currentState)
+        float previousDistance;
+        float newDistance;
+        switch (currentState)
         {
             case State.off_screen:
                 if(currentCase != null)
@@ -76,9 +78,11 @@ public class Animal : MonoBehaviour
                 break;
             case State.walk_in:
                 //Move them towards the idle position
+                previousDistance = Vector3.Distance(transform.position, idlePosition.position);
                 transform.position += (idlePosition.position - transform.position).normalized * speed * Time.deltaTime;
-                //if close enough to idle position then
-                if(Vector3.Distance(transform.position, idlePosition.position) < arrivalDistance)
+                newDistance = Vector3.Distance(transform.position, idlePosition.position);
+                //if close enough to idle position then //newDistance < arrivalDistance || newDistance > previousDistance
+                if (newDistance < arrivalDistance || newDistance > previousDistance)
                 {
                     if(Random.Range(0f, 1.0f) <= chanceToShowGreeting && currentCase.CurrentCaseData.CurrentAnimal.PossibleGreetings.Count>0)
                     {
@@ -92,10 +96,12 @@ public class Animal : MonoBehaviour
 
                 break;
             case State.walk_out:
+                previousDistance = Vector3.Distance(transform.position, exitPosition.position);
                 //Move them towards the exit position
                 transform.position += (exitPosition.position - transform.position).normalized * speed * Time.deltaTime;
+                newDistance = Vector3.Distance(transform.position, exitPosition.position);
                 //if close enough to exit position then
-                if(Vector3.Distance(transform.position, exitPosition.position) < arrivalDistance)
+                if (newDistance < arrivalDistance || newDistance > previousDistance)
                 {
                     //Set the state to off_screen
                     currentState = State.off_screen;

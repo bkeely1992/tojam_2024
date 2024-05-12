@@ -51,22 +51,27 @@ public class Case : MonoBehaviour
 
     private void Update()
     {
+        float newDistance;
+        float previousDistance;
         switch(currentState)
         {
             case State.visible:
                 break;
             case State.sliding_up:
+                previousDistance = Vector3.Distance(targetPosition, transform.position);
                 transform.position += (targetPosition - transform.position).normalized * speed *Time.deltaTime;
-                if(Vector3.Distance(targetPosition, transform.position) < arrivalDistance)
+                newDistance = Vector3.Distance(targetPosition, transform.position);
+                if (newDistance < arrivalDistance || newDistance > previousDistance)
                 {
                     currentState = State.visible;
                     onCaseIsVisible.Invoke();
                 }
                 break;
             case State.sliding_down:
-                
+                previousDistance = Vector3.Distance(targetPosition, transform.position);
                 transform.position += (targetPosition - transform.position).normalized * speed * Time.deltaTime;
-                if(Vector3.Distance(targetPosition, transform.position) < arrivalDistance)
+                newDistance = Vector3.Distance(targetPosition, transform.position);
+                if (newDistance < arrivalDistance || newDistance > previousDistance)
                 {
                     currentState = State.inactive;
                 }
