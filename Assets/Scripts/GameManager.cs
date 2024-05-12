@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public int dayIndex = 0;
+    public int totalLoginCount = 0;
     public float timeInDay = 60;
 
     public UnityEvent OnDayIsOver;
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    public int IncreaseLoginCountAndReturnTheResult() => ++totalLoginCount;
 
     public void EndGame()
     {

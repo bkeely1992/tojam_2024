@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 //Script used for managing the details of the visualization of the computer database in-game
 public class ComputerDatabase : MonoBehaviour
 {
     private enum State
     {
-        live, confirming, screensaver, login, game, invalid
+        live, confirming, screensaver, login, waitingForGame, game, invalid
     }
     private State currentState = State.login;
     [SerializeField]
@@ -29,6 +30,16 @@ public class ComputerDatabase : MonoBehaviour
 
     [SerializeField]
     private Screensaver screensaver;
+
+    [SerializeField]
+    private int captchaScreenDelayTime;
+    [SerializeField] 
+    private GameObject captchaWarningScreen;
+    
+    [SerializeField]
+    private int loggingInScreenDelayTime;
+    [SerializeField] 
+    private GameObject loggingInScreen;
 
     [SerializeField]
     private GameObject loginParent;
@@ -180,6 +191,40 @@ public class ComputerDatabase : MonoBehaviour
     {
         AudioManager.Instance.PlaySound("button_press", true);
         loginParent.SetActive(false);
+        var loginCount = FindObjectOfType<GameManager>().totalLoginCount;
+        if (loginCount > 2 && Random.Range(0,2)==0) // Show captcha only after the second time we log in and pick it randomly
+        {
+            ShowCaptchaLogin();
+        }
+        else
+        {
+            JustLogThemIn();
+
+        }
+    }
+
+    public void JustLogThemIn()
+    {
+        computerExceptionsPageObject.SetActive(true);
+        currentState = State.live;
+    }
+
+    public void ShowCaptchaLogin()
+    {
+        StartCoroutine(ShowCaptchaScreen());
+    }
+    
+    private IEnumerator ShowCaptchaScreen()
+    {
+        currentState = State.waitingForGame;
+        captchaWarningScreen.SetActive(true);
+        yield return new WaitForSeconds(captchaScreenDelayTime);
+        captchaWarningScreen.SetActive(false);
+        
+        loggingInScreen.SetActive(true);
+        yield return new WaitForSeconds(loggingInScreenDelayTime);
+        loggingInScreen.SetActive(false);
+        
         currentMinigameObject = Instantiate(minigamePrefabs[UnityEngine.Random.Range(0, minigamePrefabs.Count)], computerMiniGameParent);
         Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
         minigame.onLose.AddListener(LoseGame);
