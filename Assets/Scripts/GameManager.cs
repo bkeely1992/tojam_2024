@@ -40,17 +40,33 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Clock clock;
 
+    [SerializeField]
+    private TutorialManager tutorialManager;
+
+    [SerializeField]
+    private GameObject tutorialPromptObject;
+
     private bool hasWarnedOnTime = false;
+    private bool tutorialIsOn = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("StartDay", 1f);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(tutorialIsOn)
+        {
+            if(!tutorialManager.HasStarted)
+            {
+                tutorialIsOn = false;
+                Invoke("StartDay", 1f);
+            }
+        }
+
         if (currentState == GameState.DAY_IS_RUNNING)
         {
             timeRemaining -= Time.deltaTime;
@@ -66,6 +82,19 @@ public class GameManager : MonoBehaviour
                 AudioManager.Instance.PlaySound("time_expiring");
             }
         }
+    }
+
+    public void SkipTutorial()
+    {
+        tutorialPromptObject.SetActive(false);
+        Invoke("StartDay", 1f);
+    }
+
+    public void StartTutorial()
+    {
+        tutorialPromptObject.SetActive(false);
+        tutorialIsOn = true;
+        tutorialManager.Initialize();
     }
 
     public void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
