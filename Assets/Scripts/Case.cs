@@ -31,6 +31,9 @@ public class Case : MonoBehaviour
     [SerializeField]
     private Transform visiblePosition, inactivePosition;
 
+    [SerializeField]
+    private Image speciesIconImage, dietIconImage, classIconImage;
+
     public float speed;
     public float arrivalDistance;
 
@@ -90,6 +93,8 @@ public class Case : MonoBehaviour
         animalNameText.text = animalData.CurrentName;
         crimeImage.sprite = currentCaseData.CurrentCrime.sprite;
         crimeNameText.text = currentCaseData.CurrentCrime.crimeText;
+        dietIconImage.sprite = currentCaseData.CurrentAnimal.dietSprite;
+        classIconImage.sprite = currentCaseData.CurrentAnimal.classSprite;
         currentState = State.sliding_up;
 
         targetPosition = visiblePosition.position;

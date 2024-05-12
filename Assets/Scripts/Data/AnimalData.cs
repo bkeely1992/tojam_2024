@@ -13,6 +13,9 @@ namespace Assets.Scripts.Data
     {
         public Sprite characterSprite;
         public Sprite caseFileSprite;
+        public Sprite dietSprite;
+        public Sprite classSprite;
+
         public enum Animal_class
         {
             mammal, bird, reptile, invalid
