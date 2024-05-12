@@ -16,7 +16,16 @@ public class ScreensaverBall : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+    }
+    private void OnEnable()
+    {
+        if(rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
         rb.velocity = (new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0)).normalized * speed;
+
     }
 
     // Update is called once per frame

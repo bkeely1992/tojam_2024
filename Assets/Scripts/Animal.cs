@@ -12,7 +12,7 @@ public class Animal : MonoBehaviour
     //State machine logic used for managing the behaviour of the animal
     public enum State
     {
-        off_screen, walk_in, walk_out, guilty, idle, invalid
+        off_screen, walk_in, walk_out, react, guilty, idle, invalid
     }
     private State currentState = State.off_screen;
     private Case currentCase = null;
@@ -37,12 +37,16 @@ public class Animal : MonoBehaviour
     private TMPro.TMP_Text dialogueText;
 
     [SerializeField]
+    private float waitingTime = 0.0f;
+
+    [SerializeField]
     private float chanceToShowGreeting = 0.5f;
 
     [SerializeField]
     private float chanceToShowReaction = 0.5f;
 
     private float timeRemainingToShowDialogue = 0f;
+    private float timeRemainingToWait = 0.0f;
     public bool guiltyChosen = false;
 
     // Start is called before the first frame update
@@ -97,6 +101,20 @@ public class Animal : MonoBehaviour
                 }
 
                 break;
+            case State.react:
+                timeRemainingToWait -= Time.deltaTime;
+                if(timeRemainingToWait <= 0)
+                {
+                    if (guiltyChosen)
+                    {
+                        currentState = State.guilty;
+                    }
+                    else
+                    {
+                        currentState = State.walk_out;
+                    }
+                }
+                break;
             case State.guilty:
                 //Move them towards the exit position
                 transform.position += (startPosition.position - transform.position).normalized * speed * Time.deltaTime;
@@ -134,15 +152,8 @@ public class Animal : MonoBehaviour
     {
         if(currentState == State.idle)
         {
-            if(guiltyChosen)
-            {
-                currentState = State.guilty;
-            }
-            else
-            {
-                currentState = State.walk_out;
-            }
-            
+            currentState = State.react;
+            timeRemainingToWait = waitingTime;
         }
     }
 

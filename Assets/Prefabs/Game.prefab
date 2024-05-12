@@ -6550,6 +6550,7 @@ MonoBehaviour:
       m_Calls: []
   dialogueContainerObject: {fileID: 2504325292818496956}
   dialogueText: {fileID: 4955162422713159262}
+  waitingTime: 0.75
   chanceToShowGreeting: 0.5
   chanceToShowReaction: 0.5
   guiltyChosen: 0
