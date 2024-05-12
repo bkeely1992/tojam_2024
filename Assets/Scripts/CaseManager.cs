@@ -269,6 +269,7 @@ public class CaseManager : MonoBehaviour
         currentAnimalData.SetName();
         //Randomly choose a crime
         CrimeData currentCrimeData = crimeDataMap[CrimeData.AllCrimes[Random.Range(0, CrimeData.AllCrimes.Count)]];
+        currentCrimeData.currentCrimeDescription = currentCrimeData.possibleCrimeDescriptions[Random.Range(0, currentCrimeData.possibleCrimeDescriptions.Count)];
         return new CaseData(dayIndex, currentAnimalData, currentCrimeData);
     }
 
@@ -278,6 +279,8 @@ public class CaseManager : MonoBehaviour
         var pickedCase = validAuthoredCases[Random.Range(0, validAuthoredCases.Count)];
         addedAuthoredCasesToCurrentDay.Add(pickedCase.GimmeYourGuid()); // add the picked case to the authored cases
         pickedCase.Animal.SetName();
+        pickedCase.Crime.currentCrimeDescription = pickedCase.Crime.possibleCrimeDescriptions[Random.Range(0, pickedCase.Crime.possibleCrimeDescriptions.Count)];
+
         return new CaseData(dayIndex, pickedCase.Animal, pickedCase.Crime);
     }
 

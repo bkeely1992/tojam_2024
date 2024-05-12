@@ -92,7 +92,7 @@ public class Case : MonoBehaviour
         animalImage.sprite = animalData.characterSprite;
         animalNameText.text = animalData.CurrentName;
         crimeImage.sprite = currentCaseData.CurrentCrime.sprite;
-        crimeNameText.text = currentCaseData.CurrentCrime.crimeText;
+        crimeNameText.text = currentCaseData.CurrentCrime.currentCrimeDescription;
         dietIconImage.sprite = currentCaseData.CurrentAnimal.dietSprite;
         classIconImage.sprite = currentCaseData.CurrentAnimal.classSprite;
         currentState = State.sliding_up;

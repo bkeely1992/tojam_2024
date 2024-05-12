@@ -1741,15 +1741,39 @@ MonoBehaviour:
   allCrimeData:
   - crimeValue: 0
     crimeText: Robbery
+    possibleCrimeDescriptions:
+    - Took candy from a baby.
+    - Grand theft auto.
+    - Was a part of a bank robbery.
+    - Broke into someone's house.
+    - Stole a wallet in the park.
+    currentCrimeDescription: 
     sprite: {fileID: 21300000, guid: 6cf1d88cb87993e4f981d34fd095752f, type: 3}
   - crimeValue: 1
     crimeText: Homicide
+    possibleCrimeDescriptions:
+    - Killed the mailman.
+    - Suspected of killing their partner.
+    - Got into an argument with the victim.
+    currentCrimeDescription: 
     sprite: {fileID: 21300000, guid: d2184ee671bb02a42af0a2f9f60b4198, type: 3}
   - crimeValue: 2
     crimeText: Arson
+    possibleCrimeDescriptions:
+    - Set fire to someone's house.
+    - Tried to burn down a school.
+    - Started a fire for fun.
+    currentCrimeDescription: 
     sprite: {fileID: 21300000, guid: 2c53992d2242e7a45a91c35a67cb7321, type: 3}
   - crimeValue: 3
     crimeText: Fraud
+    possibleCrimeDescriptions:
+    - Stole someone's identity.
+    - Impersonated the authorities.
+    - Operated a telemarketing scam.
+    - Created fake cheques.
+    - Tried to falsify their tax records.
+    currentCrimeDescription: 
     sprite: {fileID: 21300000, guid: 93b60280e18de9d44a19ed7afc159e24, type: 3}
   decisionButtonsHolder: {fileID: 2259650888884423629}
   basePossibleGreetings:
@@ -2307,7 +2331,7 @@ MonoBehaviour:
   m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 432b3a02a0c33c649a0c40fa22caf3e3, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -1268152943464548254, guid: 432b3a02a0c33c649a0c40fa22caf3e3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8131,7 +8155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46, y: 227}
+  m_AnchoredPosition: {x: -70, y: 227}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7204469850881992534
@@ -8165,7 +8189,7 @@ MonoBehaviour:
   m_text: You have been fired. And jailed.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 432b3a02a0c33c649a0c40fa22caf3e3, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -1268152943464548254, guid: 432b3a02a0c33c649a0c40fa22caf3e3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8225,7 +8249,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -115.78162, w: -130.07562}
+  m_margin: {x: 0, y: 0, z: -169.67554, w: -130.07562}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 1
@@ -8699,7 +8723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1590328756581528009
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8716,8 +8740,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138, y: 433}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -196.90259, y: 317.75467}
+  m_SizeDelta: {x: 246.1948, y: 132.4907}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6732384296899831013
 CanvasRenderer:
@@ -8750,7 +8774,7 @@ MonoBehaviour:
   m_text: Arson
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 432b3a02a0c33c649a0c40fa22caf3e3, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -1268152943464548254, guid: 432b3a02a0c33c649a0c40fa22caf3e3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8810,7 +8834,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 87.579895, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.6897583, w: -1.0997925}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 1

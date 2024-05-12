@@ -36,4 +36,8 @@ MonoBehaviour:
     Crime:
       crimeValue: 0
       crimeText: Robbery
+      possibleCrimeDescriptions:
+      - Took another dog's bone.
+      - Broke into a house by accident.
+      currentCrimeDescription: 
       sprite: {fileID: 21300000, guid: c8a940f6efbb89448b989a59ea7937bf, type: 3}

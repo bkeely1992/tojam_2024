@@ -16,5 +16,9 @@ public class CrimeData
 
     public string crimeText = "";
 
+    public List<string> possibleCrimeDescriptions = new List<string>();
+
+    public string currentCrimeDescription = "";
+
     public Sprite sprite;
 }

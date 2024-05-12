@@ -61,7 +61,7 @@ MonoBehaviour:
     type: 0
   - name: day_complete
     clip: {fileID: 8300000, guid: d94d064c00633314dac57e21f9e72187, type: 3}
-    volume: 0.6
+    volume: 0.4
     pitch: 1
     looping: 0
     source: {fileID: 0}
