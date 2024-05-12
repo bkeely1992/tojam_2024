@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private ComputerDatabase computer;
+
+    [SerializeField]
+    private Clock clock;
     
     // Start is called before the first frame update
     void Start()
@@ -60,11 +63,13 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        clock.DisableClock();
         OnGameOver?.Invoke();
     }
     
     public void StartDay()
     {
+        clock.StartTimer(timeInDay);
         currentState = GameState.DAY_IS_RUNNING;
         timeRemaining = timeInDay;
         
@@ -74,6 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void EndDay()
     {
+        clock.DisableClock();
         currentState = GameState.WAITING_FOR_NEW_DAY;
         OnDayIsOver?.Invoke();
         dayIndex++; // Increase the day.
