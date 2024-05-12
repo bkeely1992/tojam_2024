@@ -17,6 +17,8 @@ public class Animal : MonoBehaviour
     private State currentState = State.off_screen;
     private Case currentCase = null;
 
+    [SerializeField] 
+    private Animator walkingAnimator;
     //Transforms used for determining where the animal navigates in the scene
     [SerializeField]
     private Transform startPosition, idlePosition, exitPosition;
@@ -74,6 +76,7 @@ public class Animal : MonoBehaviour
 
                     //Set the state to walk_in
                     currentState = State.walk_in;
+                    walkingAnimator.SetTrigger("Play");
                 }
                 break;
             case State.walk_in:
@@ -158,6 +161,7 @@ public class Animal : MonoBehaviour
 
     public void Leave()
     {
+        walkingAnimator.SetTrigger("Play");
         if(currentState == State.idle)
         {
             currentState = State.react;
