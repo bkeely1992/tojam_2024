@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
             if(!tutorialManager.HasStarted)
             {
                 tutorialIsOn = false;
+                AudioManager.Instance.PlaySound("music");
                 Invoke("StartDay", 1f);
             }
         }
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
     public void SkipTutorial()
     {
         tutorialPromptObject.SetActive(false);
+        AudioManager.Instance.PlaySound("music");
         Invoke("StartDay", 1f);
     }
 

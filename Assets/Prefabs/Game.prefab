@@ -991,6 +991,7 @@ GameObject:
   - component: {fileID: 8873603653338500801}
   - component: {fileID: 224376752257451686}
   - component: {fileID: 8584358618921493261}
+  - component: {fileID: 2951049506579734071}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -1055,6 +1056,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &2951049506579734071
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501291708299338448}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e5fa3773854f640aeb2a45c7303c7cd2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &551946412886894911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2215,7 @@ MonoBehaviour:
     dietException: 3
     speciesException: 4
     crimeSprite: {fileID: 21300000, guid: a88cc26bfbf318548997bc972f8dbdd8, type: 3}
-    animalSprite: {fileID: 21300000, guid: dc295d28d99e8434dae41419c70336d0, type: 3}
+    animalSprite: {fileID: 21300000, guid: 32ae4c152db0b69409e397d6b0768818, type: 3}
     crimeName: 
   - crime: 3
     classException: 2
@@ -2207,13 +2229,13 @@ MonoBehaviour:
     dietException: 3
     speciesException: 1
     crimeSprite: {fileID: 21300000, guid: 22d9a72bc4ce3f349ad45acd4a64fa36, type: 3}
-    animalSprite: {fileID: 21300000, guid: beafd82fbab5eed43a13050d4cf7489a, type: 3}
+    animalSprite: {fileID: 21300000, guid: 13a3d13b01e3843489bd7120b39c16c8, type: 3}
     crimeName: 
   strikesText: {fileID: 5809356562900662067}
   computerDatabase: {fileID: 994862714636275301}
   allAnimalData:
   - characterSprite: {fileID: 21300000, guid: 84bfdf5c1e13be54db927afb496f6a28, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: 84bfdf5c1e13be54db927afb496f6a28, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: 4f4266ac18fb1094e82569bf3e2349fd, type: 3}
     dietSprite: {fileID: 21300000, guid: 159803bf0ae662e45b75102b4e5dfb5e, type: 3}
     classSprite: {fileID: 21300000, guid: 0fbd59d631fe12f408bc62bef289b9ed, type: 3}
     dialogueSound: dialogue_mumbling1
@@ -2230,7 +2252,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: beafd82fbab5eed43a13050d4cf7489a, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: beafd82fbab5eed43a13050d4cf7489a, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: 13a3d13b01e3843489bd7120b39c16c8, type: 3}
     dietSprite: {fileID: 21300000, guid: e3eba262d495d9e4da77e1c182e2e685, type: 3}
     classSprite: {fileID: 21300000, guid: 0fbd59d631fe12f408bc62bef289b9ed, type: 3}
     dialogueSound: dialogue_mumbling1
@@ -2247,7 +2269,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: 66994a37b42c7634da791e4ef62b7e1c, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: 66994a37b42c7634da791e4ef62b7e1c, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: 2d1ef7bf624f08348bc66c3d357c6588, type: 3}
     dietSprite: {fileID: 21300000, guid: 4f110636bbae84044869e0d2e1128644, type: 3}
     classSprite: {fileID: 21300000, guid: 0fbd59d631fe12f408bc62bef289b9ed, type: 3}
     dialogueSound: dialogue_mumbling3
@@ -2264,7 +2286,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: c14e0fc3e9c0ffc428629f947c35e8ed, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: c14e0fc3e9c0ffc428629f947c35e8ed, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: 19e6a8953a702bb4cb0f3448c2f49c0b, type: 3}
     dietSprite: {fileID: 21300000, guid: e3eba262d495d9e4da77e1c182e2e685, type: 3}
     classSprite: {fileID: 21300000, guid: ba05728b897c9d34a9f5e5f41f0842cd, type: 3}
     dialogueSound: dialogue_mumbling1
@@ -2281,7 +2303,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: dc295d28d99e8434dae41419c70336d0, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: dc295d28d99e8434dae41419c70336d0, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: 32ae4c152db0b69409e397d6b0768818, type: 3}
     dietSprite: {fileID: 21300000, guid: 4f110636bbae84044869e0d2e1128644, type: 3}
     classSprite: {fileID: 21300000, guid: ba05728b897c9d34a9f5e5f41f0842cd, type: 3}
     dialogueSound: dialogue_mumbling2
@@ -2298,7 +2320,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: a62cf5219c46aea4ba25cc1b3248580b, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: a62cf5219c46aea4ba25cc1b3248580b, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: e302eaec78887dc4593f219b0c9e2c67, type: 3}
     dietSprite: {fileID: 21300000, guid: 4f110636bbae84044869e0d2e1128644, type: 3}
     classSprite: {fileID: 21300000, guid: ba05728b897c9d34a9f5e5f41f0842cd, type: 3}
     dialogueSound: dialogue_mumbling3
@@ -2315,7 +2337,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: 17758829988d4694cb823180770fb458, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: 17758829988d4694cb823180770fb458, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: c75258d871f17f64288348beb4430f6d, type: 3}
     dietSprite: {fileID: 21300000, guid: 159803bf0ae662e45b75102b4e5dfb5e, type: 3}
     classSprite: {fileID: 21300000, guid: 9747095392e7ab34cbc32dea607cd338, type: 3}
     dialogueSound: dialogue_mumbling2
@@ -2332,7 +2354,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: abf06e0bb77754e46966ca17054ddb7a, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: abf06e0bb77754e46966ca17054ddb7a, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: e6f2f6b77b2042b4d82b3b1ef4843743, type: 3}
     dietSprite: {fileID: 21300000, guid: 4f110636bbae84044869e0d2e1128644, type: 3}
     classSprite: {fileID: 21300000, guid: 9747095392e7ab34cbc32dea607cd338, type: 3}
     dialogueSound: dialogue_mumbling1
@@ -2349,7 +2371,7 @@ MonoBehaviour:
     possibleCorrectInnocentReactions: []
     possibleIncorrectInnocentReactions: []
   - characterSprite: {fileID: 21300000, guid: da260b267d177214bb25a33ba9329065, type: 3}
-    caseFileSprite: {fileID: 21300000, guid: da260b267d177214bb25a33ba9329065, type: 3}
+    caseFileSprite: {fileID: 21300000, guid: 84f29f6c47e3371469280939a92730a3, type: 3}
     dietSprite: {fileID: 21300000, guid: e3eba262d495d9e4da77e1c182e2e685, type: 3}
     classSprite: {fileID: 21300000, guid: 9747095392e7ab34cbc32dea607cd338, type: 3}
     dialogueSound: dialogue_mumbling2
@@ -6050,7 +6072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8862745}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9783,6 +9805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347582d7b614f104e971eed6f0ac0676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkingAnimator: {fileID: 2951049506579734071}
   startPosition: {fileID: 5782999139354298807}
   idlePosition: {fileID: 5616884076061069750}
   exitPosition: {fileID: 9214404748145081511}
@@ -12480,7 +12503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4591434469574977546
 RectTransform:
   m_ObjectHideFlags: 0

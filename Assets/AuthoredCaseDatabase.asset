@@ -17,7 +17,7 @@ MonoBehaviour:
     DayRanges: {x: 0, y: 1}
     Animal:
       characterSprite: {fileID: 21300000, guid: 84bfdf5c1e13be54db927afb496f6a28, type: 3}
-      caseFileSprite: {fileID: 21300000, guid: 84bfdf5c1e13be54db927afb496f6a28, type: 3}
+      caseFileSprite: {fileID: 21300000, guid: 4f4266ac18fb1094e82569bf3e2349fd, type: 3}
       dietSprite: {fileID: 21300000, guid: 159803bf0ae662e45b75102b4e5dfb5e, type: 3}
       classSprite: {fileID: 21300000, guid: 0fbd59d631fe12f408bc62bef289b9ed, type: 3}
       dialogueSound: dialogue_mumbling1
@@ -39,5 +39,5 @@ MonoBehaviour:
       possibleCrimeDescriptions:
       - Took another dog's bone.
       - Broke into a house by accident.
-      currentCrimeDescription: Took another dog's bone.
+      currentCrimeDescription: Broke into a house by accident.
       sprite: {fileID: 21300000, guid: 22d9a72bc4ce3f349ad45acd4a64fa36, type: 3}

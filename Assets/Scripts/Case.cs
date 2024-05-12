@@ -94,7 +94,7 @@ public class Case : MonoBehaviour
         //Play a papers shuffling sound
         AudioManager.Instance.PlaySound("paper_slide");
         //Set the images on the case
-        animalImage.sprite = animalData.characterSprite;
+        animalImage.sprite = animalData.caseFileSprite;
         animalNameText.text = animalData.CurrentName;
         crimeImage.sprite = currentCaseData.CurrentCrime.sprite;
         crimeNameText.text = currentCaseData.CurrentCrime.currentCrimeDescription;

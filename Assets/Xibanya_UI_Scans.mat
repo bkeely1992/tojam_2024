@@ -30,8 +30,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _ScanlineCount: 500
-    - _ScanlineIntensity: 2
+    - _ScanlineIntensity: 0.5
     - _ScanlineSpeed: 200
     m_Colors:
-    - _ScanColor: {r: 0.3301887, g: 0.20481043, b: 0.079432175, a: 0.08627451}
+    - _ScanColor: {r: 0.33018863, g: 0.20481038, b: 0.07943214, a: 0.08627451}
   m_BuildTextureStacks: []
