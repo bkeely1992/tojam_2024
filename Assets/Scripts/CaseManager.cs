@@ -95,6 +95,11 @@ public class CaseManager : MonoBehaviour
     [SerializeField]
     private Rulebook rulebook;
 
+    [SerializeField]
+    private List<Strike> strikeObjects;
+
+    private Dictionary<int, Strike> strikeObjectMap = new Dictionary<int, Strike>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -123,7 +128,10 @@ public class CaseManager : MonoBehaviour
         {
             animalClassMap.Add(animalClass.animalClass, animalClass);
         }
-
+        foreach(Strike strikeObject in strikeObjects)
+        {
+            strikeObjectMap.Add(strikeObject.Index, strikeObject);
+        }
     }
 
     private void OnDestroy()
@@ -332,7 +340,8 @@ public class CaseManager : MonoBehaviour
         {
             //Player guessed incorrectly
             strikes++;
-            strikesText.text = "Strikes: " + strikes.ToString();
+            strikeObjectMap[strikes].SetStrikeObjectVisibility(true);
+            //strikesText.text = "Strikes: " + strikes.ToString();
         }
 
         if (Random.Range(0f, 1.0f) <= chanceToShowReaction)
@@ -346,6 +355,7 @@ public class CaseManager : MonoBehaviour
                 currentAnimal.ShowDialogue(currentAnimal.GetInnocentReaction(isGuilty == submittedGuilty));
             }
         }
+        currentAnimal.guiltyChosen = submittedGuilty;
 
         currentCase.Complete();
         if (strikes >= MaxStrikeCount)
@@ -378,6 +388,7 @@ public class CaseManager : MonoBehaviour
     // End day if we are out of time or out of cases in hand
     private void EndDayByFinishingCases()
     {
+        computerDatabase.ResetComputer();
         FindObjectOfType<GameManager>().EndDay();
         Debug.Log("DAY OVER");
     }

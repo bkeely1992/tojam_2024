@@ -12,7 +12,7 @@ public class Animal : MonoBehaviour
     //State machine logic used for managing the behaviour of the animal
     public enum State
     {
-        off_screen, walk_in, walk_out, idle, invalid
+        off_screen, walk_in, walk_out, guilty, idle, invalid
     }
     private State currentState = State.off_screen;
     private Case currentCase = null;
@@ -43,6 +43,7 @@ public class Animal : MonoBehaviour
     private float chanceToShowReaction = 0.5f;
 
     private float timeRemainingToShowDialogue = 0f;
+    public bool guiltyChosen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -96,12 +97,25 @@ public class Animal : MonoBehaviour
                 }
 
                 break;
+            case State.guilty:
+                //Move them towards the exit position
+                transform.position += (startPosition.position - transform.position).normalized * speed * Time.deltaTime;
+                //if close enough to exit position then
+                if (Vector3.Distance(transform.position, startPosition.position) < arrivalDistance)
+                {
+                    timeRemainingToShowDialogue = 0f;
+                    transform.position = startPosition.position;
+                    //Set the state to off_screen
+                    currentState = State.off_screen;
+                }
+
+                break;
             case State.idle:
                 //Wait until the player hits submit or the time runs out
                 break;
         }
 
-        if(timeRemainingToShowDialogue > 0)
+        if(timeRemainingToShowDialogue >= 0)
         {
             timeRemainingToShowDialogue -= Time.deltaTime;
             if(timeRemainingToShowDialogue < 0)
@@ -120,7 +134,15 @@ public class Animal : MonoBehaviour
     {
         if(currentState == State.idle)
         {
-            currentState = State.walk_out;
+            if(guiltyChosen)
+            {
+                currentState = State.guilty;
+            }
+            else
+            {
+                currentState = State.walk_out;
+            }
+            
         }
     }
 

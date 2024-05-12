@@ -80,11 +80,7 @@ public class ComputerDatabase : MonoBehaviour
                 timeWaiting += Time.deltaTime;
                 if(timeWaiting > timeBeforeScreensaver)
                 {
-                    timeWaiting = 0.0f;
-                    computerExceptionsParent.gameObject.SetActive(false);
-                    confirmationParent.SetActive(false);
-                    screensaver.gameObject.SetActive(true);
-                    currentState = State.screensaver;
+                    ResetComputer();
                 }
                 break;
         }
@@ -162,5 +158,25 @@ public class ComputerDatabase : MonoBehaviour
         screensaver.gameObject.SetActive(false);
         loginParent.SetActive(true);
         currentState = State.login;
+    }
+
+    public void ResetComputer()
+    {
+        if(currentMinigameObject != null)
+        {
+            Minigame minigame = currentMinigameObject.GetComponent<Minigame>();
+            minigame.onLose.RemoveListener(LoseGame);
+            minigame.onWin.RemoveListener(CompleteGame);
+            Destroy(currentMinigameObject);
+        }
+
+        timeWaiting = 0.0f;
+        computerMiniGameParent.gameObject.SetActive(false);
+        computerExceptionsParent.gameObject.SetActive(false);
+        confirmationParent.SetActive(false);
+        loginParent.SetActive(false);
+        
+        screensaver.gameObject.SetActive(true);
+        currentState = State.screensaver;
     }
 }
