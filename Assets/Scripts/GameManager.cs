@@ -76,5 +76,6 @@ public class GameManager : MonoBehaviour
     {
         currentState = GameState.WAITING_FOR_NEW_DAY;
         OnDayIsOver?.Invoke();
+        dayIndex++; // Increase the day.
     }
 }
