@@ -29,6 +29,9 @@ public class CaseManager : MonoBehaviour
     [SerializeField]
     private Case currentCase;
 
+    [SerializeField]
+    private TMPro.TMP_Text casesRemainingText;
+
     //Script used for managing the visualization of the animal in-game
     [SerializeField]
     private Animal currentAnimal;
@@ -205,7 +208,7 @@ public class CaseManager : MonoBehaviour
             var generatedCaseForTheDay = GenerateNewCaseData(dayIndex);
             queuedCases.Enqueue(generatedCaseForTheDay);
         }
-
+        casesRemainingText.text = queuedCases.Count.ToString();
         currentNumberOfCases += numberOfCasesDayIncrement;
         currentCase.SetNextCase(queuedCases.Dequeue());
         currentAnimal.Generate(currentCase);
@@ -252,6 +255,7 @@ public class CaseManager : MonoBehaviour
         // If so, see if we have any space for random cases
         // If there are slots for random cases hit them in, if not just get the authored ones\
         remainingCasesForTheDay--;
+        
         return pickedCase;
     }
 
@@ -373,6 +377,7 @@ public class CaseManager : MonoBehaviour
         }
         else if (!queuedCases.Any())
         {
+            casesRemainingText.text = queuedCases.Count.ToString();
             // No case for the day, end it
             currentAnimal.Generate(null);
             EndDayByFinishingCases();
@@ -380,6 +385,7 @@ public class CaseManager : MonoBehaviour
         }
         else
         {
+            casesRemainingText.text = queuedCases.Count.ToString();
             // Next case
             currentCase.SetNextCase(queuedCases.Dequeue());
             currentAnimal.Generate(currentCase);

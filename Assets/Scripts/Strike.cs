@@ -10,9 +10,12 @@ public class Strike : MonoBehaviour
 
     [SerializeField]
     private GameObject onObject;
+    [SerializeField]
+    private GameObject offObject;
 
     public void SetStrikeObjectVisibility(bool isOn)
     {
         onObject.SetActive(isOn);
+        offObject.SetActive(!isOn);
     }
 }
