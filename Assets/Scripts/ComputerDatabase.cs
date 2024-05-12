@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Script used for managing the details of the visualization of the computer database in-game
 public class ComputerDatabase : MonoBehaviour
@@ -50,11 +51,17 @@ public class ComputerDatabase : MonoBehaviour
     public float confirmationMaxHeightVariance;
     public float confirmationMaxWidthVariance;
 
+    [SerializeField]
+    private Color highlightButtonColour;
+    [SerializeField]
+    private Color baseButtonColour;
+
     private Vector3 confirmationStartingPosition;
     private float timeWaiting = 0.0f;
     private GameObject currentMinigameObject;
 
     private Dictionary<CrimeData.Crime, GameObject> crimeExceptionCategoryObjectMap = new Dictionary<CrimeData.Crime, GameObject>();
+    private Dictionary<CrimeData.Crime, Image> crimeExceptionButtonImageMap = new Dictionary<CrimeData.Crime, Image>();
 
     private void Start()
     {
@@ -122,6 +129,7 @@ public class ComputerDatabase : MonoBehaviour
             crimeExceptionMap[exception.crime].Add(exception.animalSprite);
         }
         crimeExceptionCategoryObjectMap.Clear();
+        crimeExceptionButtonImageMap.Clear();
 
         bool isFirst = true;
         foreach (KeyValuePair<CrimeData.Crime, List<Sprite>> crime in crimeExceptionMap)
@@ -145,11 +153,13 @@ public class ComputerDatabase : MonoBehaviour
             if (isFirst)
             {
                 spawnedExceptionObject.SetActive(true);
+                crimeButton.crimeButtonImage.color = highlightButtonColour;
                 isFirst = false;
             }
 
             //Add to the map
             crimeExceptionCategoryObjectMap.Add(crime.Key, spawnedExceptionObject);
+            crimeExceptionButtonImageMap.Add(crime.Key, crimeButton.crimeButtonImage);
         }
     }
 
@@ -157,8 +167,10 @@ public class ComputerDatabase : MonoBehaviour
     {
         foreach(KeyValuePair<CrimeData.Crime, GameObject> crimeCategoryObject in crimeExceptionCategoryObjectMap)
         {
+            crimeExceptionButtonImageMap[crimeCategoryObject.Key].color = baseButtonColour;
             crimeCategoryObject.Value.SetActive(false);
         }
+        crimeExceptionButtonImageMap[crime].color = highlightButtonColour;
         crimeExceptionCategoryObjectMap[crime].SetActive(true);
     }
 

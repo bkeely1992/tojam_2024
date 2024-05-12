@@ -135,10 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c192d56a08c6bcd41a45267a9ddd95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdManager: {fileID: 6967397657149483153, guid: 30af7c8af83e49043bd546754f1c73f2, type: 3}
-  colliderMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &4147056455098485647
 Rigidbody2D:
   serializedVersion: 4
@@ -213,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1adca9be5a3654f897601bce1cea5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.4
+  speed: 160
 --- !u!114 &606103502652226243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,10 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c192d56a08c6bcd41a45267a9ddd95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdManager: {fileID: 0}
-  colliderMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!1 &8053373078791396537
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,10 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c192d56a08c6bcd41a45267a9ddd95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdManager: {fileID: 6967397657149483153, guid: 30af7c8af83e49043bd546754f1c73f2, type: 3}
-  colliderMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &472465010112386762
 Rigidbody2D:
   serializedVersion: 4
