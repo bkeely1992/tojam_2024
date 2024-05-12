@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa625a808c3a334dbd09cf5ebd7fd2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxStrikeCount: 10
+  MaxStrikeCount: 3
   baseNumberOfCases: 4
   numberOfCasesDayIncrement: 1
   baseNumberOfExceptions: 5
@@ -1753,19 +1753,53 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 93b60280e18de9d44a19ed7afc159e24, type: 3}
   decisionButtonsHolder: {fileID: 2259650888884423629}
   basePossibleGreetings:
-  - textValue: Hey man. Don't do something you'll regret now.
+  - textValue: Don't do something you'll regret now.
+    duration: 2.5
+  - textValue: Hello, lovely weather we're having eh?
+    duration: 2.5
+  - textValue: Let's get this over with.
+    duration: 2.5
+  - textValue: Pl-pl-please... I can't go to jail.
+    duration: 2.5
+  - textValue: I'm innocent I tell ya! Innocent!
+    duration: 2.5
+  - textValue: Lookin' good judge.
     duration: 2.5
   basePossibleCorrectGuiltyReactions:
   - textValue: Damn you!
     duration: 2
+  - textValue: It was only a matter of time I suppose..
+    duration: 2
+  - textValue: I'll be seeing you soon.
+    duration: 2
+  - textValue: ...
+    duration: 2
   basePossibleIncorrectGuiltyReactions:
   - textValue: Why are you doing this? I'm innocent!
+    duration: 2
+  - textValue: You are garbage at your job.
+    duration: 2
+  - textValue: You'll be hearing from my lawyer soon.
+    duration: 2
+  - textValue: This country really has gone to the dogs.
     duration: 2
   basePossibleCorrectInnocentReactions:
   - textValue: Thank you for believing in me.
     duration: 2
+  - textValue: It's about time. Let me out of here already.
+    duration: 2
+  - textValue: Freedom! Sweet freedom!
+    duration: 2
+  - textValue: Cool.
+    duration: 2
   basePossibleIncorrectInnocentReactions:
   - textValue: Ahahaha.
+    duration: 2
+  - textValue: You've made a powerful ally today.
+    duration: 2
+  - textValue: Don't worry, I've definitely learned the error of my ways.
+    duration: 2
+  - textValue: Time for more crime!!!!
     duration: 2
   chanceToShowReaction: 0.5
   rulebook: {fileID: 8786683890581812772}
