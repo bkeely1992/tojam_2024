@@ -46,6 +46,19 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject tutorialPromptObject;
 
+    [SerializeField]
+    private ProgressionManager progressionManager;
+
+    [SerializeField]
+    private GameObject gameOverParent;
+
+    [SerializeField]
+    private GameObject nextDayParent;
+    [SerializeField]
+    private GameObject nextDayMessageParent;
+    [SerializeField]
+    private TMPro.TMP_Text nextDayMessageText;
+
     private bool hasWarnedOnTime = false;
     private bool tutorialIsOn = false;
     
@@ -115,7 +128,8 @@ public class GameManager : MonoBehaviour
         clock.StartTimer(timeInDay);
         currentState = GameState.DAY_IS_RUNNING;
         timeRemaining = timeInDay;
-        
+
+        caseManager.UpdateCasePossibilities(dayIndex);
         caseManager.GenerateExceptionsForDay(dayIndex);
         caseManager.GenerateCasesForDay(dayIndex);
     }
@@ -126,5 +140,19 @@ public class GameManager : MonoBehaviour
         currentState = GameState.WAITING_FOR_NEW_DAY;
         OnDayIsOver?.Invoke();
         dayIndex++; // Increase the day.
+
+    }
+
+    public void ShowNextDayPage()
+    {
+        nextDayParent.SetActive(true);
+        string dayMessage = progressionManager.GetDayMessage(dayIndex);
+        nextDayMessageParent.SetActive(dayMessage != "");
+        nextDayMessageText.text = dayMessage;
+    }
+
+    public void ShowGameOverPage()
+    {
+        gameOverParent.SetActive(true);
     }
 }

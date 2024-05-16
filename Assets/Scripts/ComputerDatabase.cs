@@ -12,9 +12,9 @@ public class ComputerDatabase : MonoBehaviour
 {
     private enum State
     {
-        live, confirming, screensaver, login, waitingForGame, game, invalid
+        inactive, live, confirming, screensaver, login, waitingForGame, game, invalid
     }
-    private State currentState = State.login;
+    private State currentState = State.inactive;
     [SerializeField]
     private GameObject computerExceptionsPageObject;
 
@@ -70,6 +70,12 @@ public class ComputerDatabase : MonoBehaviour
     [SerializeField]
     private Color baseButtonColour;
 
+    [SerializeField]
+    private GameObject visualsParent;
+
+    [SerializeField]
+    private ProgressionManager progressionManager;
+
     private Vector3 confirmationStartingPosition;
     private float timeWaiting = 0.0f;
     private GameObject currentMinigameObject;
@@ -97,15 +103,22 @@ public class ComputerDatabase : MonoBehaviour
                 timeWaiting += Time.deltaTime;
                 if(timeWaiting > timeBeforeConfirmationRequired)
                 {
-                    //confirmationParent.transform.position = confirmationStartingPosition + new Vector3(Random.Range(-confirmationMaxWidthVariance, confirmationMaxWidthVariance), Random.Range(-confirmationMaxHeightVariance, confirmationMaxHeightVariance), 0f);
-                    foreach(GameObject confirmationOption in confirmationOptions)
+                    if(confirmationOptions.Count > 0 && progressionManager.isConfirmationActive)
                     {
-                        confirmationOption.SetActive(false);
+                        //confirmationParent.transform.position = confirmationStartingPosition + new Vector3(Random.Range(-confirmationMaxWidthVariance, confirmationMaxWidthVariance), Random.Range(-confirmationMaxHeightVariance, confirmationMaxHeightVariance), 0f);
+                        foreach (GameObject confirmationOption in confirmationOptions)
+                        {
+                            confirmationOption.SetActive(false);
+                        }
+                        confirmationOptions[UnityEngine.Random.Range(0, confirmationOptions.Count)].SetActive(true);
+                        confirmationParent.SetActive(true);
+                        currentState = State.confirming;
+                        AudioManager.Instance.PlaySound("confirmation_warning");
                     }
-                    confirmationOptions[UnityEngine.Random.Range(0, confirmationOptions.Count)].SetActive(true);
-                    confirmationParent.SetActive(true);
-                    currentState = State.confirming;
-                    AudioManager.Instance.PlaySound("confirmation_warning");
+                    else
+                    {
+                        timeWaiting = 0f;
+                    }
                 }
                 break;
             case State.confirming:
@@ -116,6 +129,16 @@ public class ComputerDatabase : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void Activate()
+    {
+        visualsParent.SetActive(true);
+    }
+
+    public void AddConfirmationButtons(List<GameObject> inConfirmationButtons)
+    {
+        confirmationOptions.AddRange(inConfirmationButtons);
     }
 
     //Creates all of the daily exceptions in the computer database
@@ -195,7 +218,7 @@ public class ComputerDatabase : MonoBehaviour
         AudioManager.Instance.PlaySound("button_press", true);
         loginParent.SetActive(false);
         var loginCount = FindObjectOfType<GameManager>().IncreaseLoginCountAndReturnTheResult();
-        if (loginCount > 0 && Random.Range(0,8)!=7) // Show captcha only after the second time we log in and pick it randomly 20% to not show 
+        if (progressionManager.isConfirmationActive && loginCount > 0 && Random.Range(0,8)!=7) // Show captcha only after the second time we log in and pick it randomly 20% to not show 
         {
             ShowCaptchaLogin();
         }

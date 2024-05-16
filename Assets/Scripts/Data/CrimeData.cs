@@ -8,9 +8,9 @@ public class CrimeData
 {
     public enum Crime
     {
-        robbery, homicide, arson, fraud, invalid
+        robbery, homicide, arson, fraud, drugs, stalking, vandalism, invalid
     }
-    public static List<Crime> AllCrimes = new List<Crime>() { Crime.robbery, Crime.homicide, Crime.arson, Crime.fraud };
+    public static List<Crime> AllCrimes = new List<Crime>() { Crime.robbery, Crime.homicide, Crime.arson, Crime.fraud, Crime.drugs, Crime.stalking, Crime.vandalism };
 
     public Crime crimeValue;
 

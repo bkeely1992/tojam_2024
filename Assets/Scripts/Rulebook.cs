@@ -1,4 +1,5 @@
 using Assets.Scripts.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,18 +43,23 @@ public class Rulebook : MonoBehaviour
         {
             DestroyImmediate(speciesExceptionsHolderObject.transform.GetChild(0).gameObject);
         }
-        foreach (CrimeExceptionData exception in exceptions)
+        AddExceptions(exceptions);
+    }
+
+    public void AddExceptions(List<CrimeExceptionData> inExceptions)
+    {
+        foreach (CrimeExceptionData exception in inExceptions)
         {
             Transform spawnParent;
-            if(exception.dietException != AnimalData.Animal_diet.invalid)
+            if (exception.dietException != AnimalData.Animal_diet.invalid)
             {
                 spawnParent = dietExceptionsHolderObject.transform;
             }
-            else if(exception.speciesException != AnimalData.Animal_species.invalid)
+            else if (exception.speciesException != AnimalData.Animal_species.invalid)
             {
                 spawnParent = speciesExceptionsHolderObject.transform;
             }
-            else if(exception.classException != AnimalData.Animal_class.invalid)
+            else if (exception.classException != AnimalData.Animal_class.invalid)
             {
                 spawnParent = classExceptionsHolderObject.transform;
             }
@@ -74,7 +80,7 @@ public class Rulebook : MonoBehaviour
         dietExceptionsHolderObject.SetActive(false);
         speciesExceptionsHolderObject.SetActive(false);
         classExceptionsHolderObject.SetActive(true);
-        sectionImage.color = classColour;
+        //sectionImage.color = classColour;
     }
     public void SetDietTab()
     {
@@ -82,7 +88,7 @@ public class Rulebook : MonoBehaviour
         classExceptionsHolderObject.SetActive(false);
         speciesExceptionsHolderObject.SetActive(false);
         dietExceptionsHolderObject.SetActive(true);
-        sectionImage.color = dietColour;
+        //sectionImage.color = dietColour;
     }
 
     public void SetSpeciesTab()
@@ -91,7 +97,7 @@ public class Rulebook : MonoBehaviour
         dietExceptionsHolderObject.SetActive(false);
         classExceptionsHolderObject.SetActive(false);
         speciesExceptionsHolderObject.SetActive(true);
-        sectionImage.color = speciesColour;
+        //sectionImage.color = speciesColour;
     }
 
 

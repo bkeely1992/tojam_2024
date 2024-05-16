@@ -101,6 +101,20 @@ public class CaseManager : MonoBehaviour
     [SerializeField]
     private List<Strike> strikeObjects;
 
+    [SerializeField]
+    private List<ExceptionType> currentValidExceptionTypes;
+    [SerializeField]
+    private List<CrimeData.Crime> currentValidCrimeTypes;
+    [SerializeField]
+    private List<Animal_species> currentValidAnimalTypes;
+
+    [SerializeField]
+    private ProgressionManager progressionManager;
+
+    [SerializeField]
+    private int maximumCasesPerDay;
+
+
     private Dictionary<int, Strike> strikeObjectMap = new Dictionary<int, Strike>();
 
 
@@ -143,17 +157,55 @@ public class CaseManager : MonoBehaviour
         currentCase.onCaseIsVisible.RemoveListener(ShowDecisionButtons);
     }
 
+    public void UpdateCasePossibilities(int dayIndex)
+    {
+        //Update the currentValidExceptionTypes based on the day
+        if(!progressionManager.isDietActive && progressionManager.dayDietBecomesActive == dayIndex)
+        {
+            progressionManager.isDietActive = true;
+            currentValidExceptionTypes.Add(ExceptionType.animal_diet);
+        }
+
+        //Update the currentValidCrimeTypes based on the day
+        currentValidCrimeTypes.AddRange(progressionManager.AddCrimeProgressionData(dayIndex));
+
+        //Update the currentValidAnimalTypes based on the day
+        currentValidAnimalTypes.AddRange(progressionManager.AddAnimalProgression(dayIndex));
+
+        //Update if the PC is on
+        if(!progressionManager.isPCActive && progressionManager.dayPCBecomesActive == dayIndex)
+        {
+            progressionManager.isPCActive = true;
+            computerDatabase.Activate();
+        }
+
+        //Update if confirmations are on
+        if(!progressionManager.isConfirmationActive && progressionManager.dayConfirmationBecomesActive == dayIndex)
+        {
+            progressionManager.isConfirmationActive = true;
+        }
+
+        //Update the currentValidConfirmationButtonVariants
+        computerDatabase.AddConfirmationButtons(progressionManager.AddConfirmationButtonProgression(dayIndex));
+
+        List<CrimeExceptionData> newRulebookExceptions = progressionManager.AddRulebookProgressionData(dayIndex);
+        rulebookExceptions.AddRange(newRulebookExceptions);
+        rulebook.AddExceptions(newRulebookExceptions);
+    }
     public void GenerateExceptionsForDay(int dayIndex)
     {
+        if(!progressionManager.isPCActive)
+        {
+            return;
+        }
         dailyExceptions = new List<CrimeExceptionData>();
-        List<ExceptionType> currentValidExceptionTypes = new List<ExceptionType>() { ExceptionType.animal_class, ExceptionType.animal_diet, ExceptionType.animal_species };  
         for(int i = 0; i < currentNumberOfExceptions; i++)
         {
             //Randomly choose one of the exception types
             ExceptionType currentExceptionType = currentValidExceptionTypes[Random.Range(0, currentValidExceptionTypes.Count)];
 
             //Randomly choose a crime
-            CrimeData.Crime currentCrime = CrimeData.AllCrimes[Random.Range(0, CrimeData.AllCrimes.Count)];
+            CrimeData.Crime currentCrime = currentValidCrimeTypes[Random.Range(0, currentValidCrimeTypes.Count)];
             
             //Tie them together with an exception
             CrimeExceptionData currentException = new CrimeExceptionData();
@@ -210,6 +262,10 @@ public class CaseManager : MonoBehaviour
         }
         casesRemainingText.text = queuedCases.Count.ToString();
         currentNumberOfCases += numberOfCasesDayIncrement;
+        if(currentNumberOfCases > maximumCasesPerDay)
+        {
+            currentNumberOfCases = maximumCasesPerDay;
+        }
         currentCase.SetNextCase(queuedCases.Dequeue());
         currentAnimal.Generate(currentCase);
     }
@@ -269,10 +325,10 @@ public class CaseManager : MonoBehaviour
     private CaseData GenerateRandomCase(int dayIndex)
     {
         //Randomly choose an animal
-        AnimalData currentAnimalData = animalDataMap[AnimalData.AllAnimalSpecies[Random.Range(0, AllAnimalSpecies.Count)]];
+        AnimalData currentAnimalData = animalDataMap[currentValidAnimalTypes[Random.Range(0, currentValidAnimalTypes.Count)]];
         currentAnimalData.SetName();
         //Randomly choose a crime
-        CrimeData currentCrimeData = crimeDataMap[CrimeData.AllCrimes[Random.Range(0, CrimeData.AllCrimes.Count)]];
+        CrimeData currentCrimeData = crimeDataMap[currentValidCrimeTypes[Random.Range(0, currentValidCrimeTypes.Count)]];
         currentCrimeData.currentCrimeDescription = currentCrimeData.possibleCrimeDescriptions[Random.Range(0, currentCrimeData.possibleCrimeDescriptions.Count)];
         return new CaseData(dayIndex, currentAnimalData, currentCrimeData);
     }
