@@ -948,6 +948,8 @@ MonoBehaviour:
     Creative Commons 0'
   - 'I Knew a Guy Kevin MacLeod (incompetech.com) Licensed under Creative Commons:
     By Attribution 3.0 http://creativecommons.org/licenses/by/3.0/'
+  - 'Rocket Boost Engine Loop.wav by qubodup -- https://freesound.org/s/146770/ --
+    License: Creative Commons 0'
   currentAudioCreditText: {fileID: 1499750003}
 --- !u!1 &762693690
 GameObject:

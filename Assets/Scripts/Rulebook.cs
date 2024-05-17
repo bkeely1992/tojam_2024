@@ -29,6 +29,9 @@ public class Rulebook : MonoBehaviour
     [SerializeField]
     private GameObject rulebookExceptionPrefab;
 
+    [SerializeField]
+    private GameObject dietTabButton;
+
     public void PopulateExceptions(List<CrimeExceptionData> exceptions)
     {
         while (classExceptionsHolderObject.transform.childCount > 0)
@@ -100,7 +103,10 @@ public class Rulebook : MonoBehaviour
         //sectionImage.color = speciesColour;
     }
 
-
+    public void ActivateDietTabObject()
+    {
+        dietTabButton.SetActive(true);
+    }
 
 
 }

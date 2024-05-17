@@ -164,6 +164,7 @@ public class CaseManager : MonoBehaviour
         {
             progressionManager.isDietActive = true;
             currentValidExceptionTypes.Add(ExceptionType.animal_diet);
+            rulebook.ActivateDietTabObject();
         }
 
         //Update the currentValidCrimeTypes based on the day

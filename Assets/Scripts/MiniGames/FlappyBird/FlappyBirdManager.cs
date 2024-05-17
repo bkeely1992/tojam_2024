@@ -49,8 +49,12 @@ public class FlappyBirdManager : Minigame
         {
             if (elapsedTime < duration)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetMouseButtonDown(0))
+                {
+                    AudioManager.Instance.PlaySound("boost", true);
                     Flap();
+                }
+                    
 
                 lastSpawnTime += Time.deltaTime;
 

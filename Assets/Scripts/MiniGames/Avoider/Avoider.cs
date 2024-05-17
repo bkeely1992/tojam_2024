@@ -81,9 +81,9 @@ public class Avoider : Minigame
         {
             if (elapsedTime < duration)
             {
-                if (Input.GetKeyUp(KeyCode.UpArrow))
+                if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetMouseButtonDown(0))
                     Move(Direction.up);
-                else if (Input.GetKeyUp(KeyCode.DownArrow))
+                else if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetMouseButtonDown(1))
                     Move(Direction.down);
 
                 lastSpawnTime += Time.deltaTime;
@@ -127,17 +127,32 @@ public class Avoider : Minigame
         {
             case Lane.top:
                 if (direction == Direction.down)
+                {
+                    AudioManager.Instance.PlaySound("boost", true);
                     currentLane = Lane.middle;
+                }
+                    
                 break;
             case Lane.middle:
                 if (direction == Direction.up)
+                {
+                    AudioManager.Instance.PlaySound("boost", true);
                     currentLane = Lane.top;
+                }
                 else
+                {
+                    AudioManager.Instance.PlaySound("boost", true);
                     currentLane = Lane.bottom;
+                }
+                    
                 break;
             case Lane.bottom:
                 if (direction == Direction.up)
+                {
+                    AudioManager.Instance.PlaySound("boost", true);
                     currentLane = Lane.middle;
+                }
+                    
                 break;
         }
 
